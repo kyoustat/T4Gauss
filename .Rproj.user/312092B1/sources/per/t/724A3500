@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1574793839407.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3761153878",
+    "id" : "724A3500",
+    "lastKnownWriteTime" : 1574794462,
+    "last_content_update" : 1574794462341,
+    "path" : "~/Desktop/T4Gauss/R/rnorm.R",
+    "project_path" : "R/rnorm.R",
+    "properties" : {
+        "cursorPosition" : "0,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

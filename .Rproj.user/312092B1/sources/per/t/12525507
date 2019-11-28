@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1574793876241.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1444863062",
+    "id" : "12525507",
+    "lastKnownWriteTime" : 1574794891,
+    "last_content_update" : 1574794891267,
+    "path" : "~/Desktop/T4Gauss/R/auxiliary.R",
+    "project_path" : "R/auxiliary.R",
+    "properties" : {
+        "cursorPosition" : "2,21",
+        "scrollLine" : "0",
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

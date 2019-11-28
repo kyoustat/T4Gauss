@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1574793532205.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "185829258",
+    "id" : "E83730F4",
+    "lastKnownWriteTime" : 1574793733,
+    "last_content_update" : 1574793733891,
+    "path" : "~/Desktop/T4Gauss/R/package-T4Gauss.R",
+    "project_path" : "R/package-T4Gauss.R",
+    "properties" : {
+        "cursorPosition" : "9,4",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

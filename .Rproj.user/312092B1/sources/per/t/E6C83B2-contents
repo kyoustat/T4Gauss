@@ -1,0 +1,12 @@
+Package: T4Gauss
+Type: Package
+Title: Tools and Methods for Gaussian Distribution
+Version: 0.1.0
+Authors@R: person("Kisung", "You", role = c("aut", "cre"),email = "kyoustat@gmail.com",comment=c(ORCID="0000-0002-8584-459X"))
+Description: More about what it does (maybe more than one line)
+License: GPL (>=3)
+Imports: Rcpp, RcppZiggurat, Rdpack, utils
+Encoding: UTF-8
+RdMacros: Rdpack
+LinkingTo: Rcpp, RcppArmadillo
+RoxygenNote: 7.0.0

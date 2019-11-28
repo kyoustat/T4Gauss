@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1574794494257.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2941391314",
+    "id" : "476D0503",
+    "lastKnownWriteTime" : 1574798359,
+    "last_content_update" : 1574798359992,
+    "path" : "~/Desktop/T4Gauss/R/rmvnorm.R",
+    "project_path" : "R/rmvnorm.R",
+    "properties" : {
+        "cursorPosition" : "29,23",
+        "scrollLine" : "17",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
