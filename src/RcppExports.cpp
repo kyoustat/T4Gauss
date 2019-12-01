@@ -6,6 +6,56 @@
 
 using namespace Rcpp;
 
+// sqrtm_covs
+arma::cube sqrtm_covs(arma::cube& covs3);
+RcppExport SEXP _T4Gauss_sqrtm_covs(SEXP covs3SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::cube& >::type covs3(covs3SEXP);
+    rcpp_result_gen = Rcpp::wrap(sqrtm_covs(covs3));
+    return rcpp_result_gen;
+END_RCPP
+}
+// wass2_barycenter
+Rcpp::List wass2_barycenter(arma::mat mean3, arma::cube covs3, arma::vec lambdas);
+RcppExport SEXP _T4Gauss_wass2_barycenter(SEXP mean3SEXP, SEXP covs3SEXP, SEXP lambdasSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type mean3(mean3SEXP);
+    Rcpp::traits::input_parameter< arma::cube >::type covs3(covs3SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type lambdas(lambdasSEXP);
+    rcpp_result_gen = Rcpp::wrap(wass2_barycenter(mean3, covs3, lambdas));
+    return rcpp_result_gen;
+END_RCPP
+}
+// wass2_dist
+arma::mat wass2_dist(arma::mat mean3, arma::cube covs3);
+RcppExport SEXP _T4Gauss_wass2_dist(SEXP mean3SEXP, SEXP covs3SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type mean3(mean3SEXP);
+    Rcpp::traits::input_parameter< arma::cube >::type covs3(covs3SEXP);
+    rcpp_result_gen = Rcpp::wrap(wass2_dist(mean3, covs3));
+    return rcpp_result_gen;
+END_RCPP
+}
+// wass2_dist2
+arma::mat wass2_dist2(arma::mat mean1, arma::mat mean2, arma::cube covs1, arma::cube covs2);
+RcppExport SEXP _T4Gauss_wass2_dist2(SEXP mean1SEXP, SEXP mean2SEXP, SEXP covs1SEXP, SEXP covs2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type mean1(mean1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type mean2(mean2SEXP);
+    Rcpp::traits::input_parameter< arma::cube >::type covs1(covs1SEXP);
+    Rcpp::traits::input_parameter< arma::cube >::type covs2(covs2SEXP);
+    rcpp_result_gen = Rcpp::wrap(wass2_dist2(mean1, mean2, covs1, covs2));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_dmvnorm
 arma::vec cpp_dmvnorm(arma::mat& X, arma::vec mean, arma::mat Sigma);
 RcppExport SEXP _T4Gauss_cpp_dmvnorm(SEXP XSEXP, SEXP meanSEXP, SEXP SigmaSEXP) {
@@ -16,6 +66,47 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::vec >::type mean(meanSEXP);
     Rcpp::traits::input_parameter< arma::mat >::type Sigma(SigmaSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_dmvnorm(X, mean, Sigma));
+    return rcpp_result_gen;
+END_RCPP
+}
+// arma_gmm_full
+Rcpp::List arma_gmm_full(arma::mat& X, int k, int maxiter);
+RcppExport SEXP _T4Gauss_arma_gmm_full(SEXP XSEXP, SEXP kSEXP, SEXP maxiterSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    rcpp_result_gen = Rcpp::wrap(arma_gmm_full(X, k, maxiter));
+    return rcpp_result_gen;
+END_RCPP
+}
+// arma_gmm_diag
+Rcpp::List arma_gmm_diag(arma::mat& X, int k, int maxiter);
+RcppExport SEXP _T4Gauss_arma_gmm_diag(SEXP XSEXP, SEXP kSEXP, SEXP maxiterSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    rcpp_result_gen = Rcpp::wrap(arma_gmm_diag(X, k, maxiter));
+    return rcpp_result_gen;
+END_RCPP
+}
+// wass2_interp
+Rcpp::List wass2_interp(arma::vec m0, arma::vec m1, arma::mat sig0, arma::mat sig1, double t);
+RcppExport SEXP _T4Gauss_wass2_interp(SEXP m0SEXP, SEXP m1SEXP, SEXP sig0SEXP, SEXP sig1SEXP, SEXP tSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type m0(m0SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type m1(m1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type sig0(sig0SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type sig1(sig1SEXP);
+    Rcpp::traits::input_parameter< double >::type t(tSEXP);
+    rcpp_result_gen = Rcpp::wrap(wass2_interp(m0, m1, sig0, sig1, t));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -64,7 +155,14 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_T4Gauss_sqrtm_covs", (DL_FUNC) &_T4Gauss_sqrtm_covs, 1},
+    {"_T4Gauss_wass2_barycenter", (DL_FUNC) &_T4Gauss_wass2_barycenter, 3},
+    {"_T4Gauss_wass2_dist", (DL_FUNC) &_T4Gauss_wass2_dist, 2},
+    {"_T4Gauss_wass2_dist2", (DL_FUNC) &_T4Gauss_wass2_dist2, 4},
     {"_T4Gauss_cpp_dmvnorm", (DL_FUNC) &_T4Gauss_cpp_dmvnorm, 3},
+    {"_T4Gauss_arma_gmm_full", (DL_FUNC) &_T4Gauss_arma_gmm_full, 3},
+    {"_T4Gauss_arma_gmm_diag", (DL_FUNC) &_T4Gauss_arma_gmm_diag, 3},
+    {"_T4Gauss_wass2_interp", (DL_FUNC) &_T4Gauss_wass2_interp, 5},
     {"_T4Gauss_rcpparma_hello_world", (DL_FUNC) &_T4Gauss_rcpparma_hello_world, 0},
     {"_T4Gauss_rcpparma_outerproduct", (DL_FUNC) &_T4Gauss_rcpparma_outerproduct, 1},
     {"_T4Gauss_rcpparma_innerproduct", (DL_FUNC) &_T4Gauss_rcpparma_innerproduct, 1},

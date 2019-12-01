@@ -1,6 +1,7 @@
 ## Auxiliary Functions
-#   (1) check_number  : check univariate number
-#   (2) check_musigma : check mu (mean) and sigma (covariance)
+#   (1) check_number     : check univariate number
+#   (2) check_musigma    : check mu (mean) and sigma (covariance)
+#   (3) check_list_gauss : check whether a list of gaussian distributions
 
 
 
@@ -32,6 +33,24 @@ check_musigma <- function(x, sigma){
   cond4 = (length(x)==nrow(sigma))
   cond5 = base::isSymmetric(sigma)
   if (cond1&&cond2&&cond3&&cond4&&cond5){
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+}
+
+
+# (3) check_list_gauss ----------------------------------------------------
+#' @keywords internal
+#' @noRd
+check_list_gauss <- function(wglist){
+  extract_dimension <- function(wg){
+    return(round(wg$dimension))
+  }
+  cond1 = is.list(wglist)
+  cond2 = (all(unlist(lapply(wglist, inherits, "wrapgauss"))==TRUE))
+  cond3 = (length(unique(unlist(lapply(wglist, extract_dimension))))==1)
+  if (cond1&&cond2&&cond3){
     return(TRUE)
   } else {
     return(FALSE)

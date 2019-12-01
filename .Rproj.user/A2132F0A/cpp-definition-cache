@@ -2,6 +2,60 @@
     {
         "definitions" : [
             {
+                "column" : 12,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/auxiliary_in_C.cpp",
+                "kind" : 6,
+                "line" : 14,
+                "name" : "sqrtm_covs(arma::cube &)",
+                "parent_name" : "",
+                "usr" : "c:@F@sqrtm_covs#&$@N@arma@C@Cube>#d#"
+            }
+        ],
+        "file" : "/home/kisung/Desktop/T4Gauss/src/auxiliary_in_C.cpp",
+        "file_last_write" : 1575146394
+    },
+    {
+        "definitions" : [
+            {
+                "column" : 12,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_barycenter.cpp",
+                "kind" : 6,
+                "line" : 14,
+                "name" : "wass2_barycenter(arma::mat, arma::cube, arma::vec)",
+                "parent_name" : "",
+                "usr" : "c:@F@wass2_barycenter#$@N@arma@C@Mat>#d#$@N@arma@C@Cube>#d#$@N@arma@C@Col>#d#"
+            }
+        ],
+        "file" : "/home/kisung/Desktop/T4Gauss/src/help_barycenter.cpp",
+        "file_last_write" : 1575177128
+    },
+    {
+        "definitions" : [
+            {
+                "column" : 11,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_dist.cpp",
+                "kind" : 6,
+                "line" : 15,
+                "name" : "wass2_dist(arma::mat, arma::cube)",
+                "parent_name" : "",
+                "usr" : "c:@F@wass2_dist#$@N@arma@C@Mat>#d#$@N@arma@C@Cube>#d#"
+            },
+            {
+                "column" : 11,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_dist.cpp",
+                "kind" : 6,
+                "line" : 54,
+                "name" : "wass2_dist2(arma::mat, arma::mat, arma::cube, arma::cube)",
+                "parent_name" : "",
+                "usr" : "c:@F@wass2_dist2#$@N@arma@C@Mat>#d#S0_#$@N@arma@C@Cube>#d#S1_#"
+            }
+        ],
+        "file" : "/home/kisung/Desktop/T4Gauss/src/help_dist.cpp",
+        "file_last_write" : 1575178725
+    },
+    {
+        "definitions" : [
+            {
                 "column" : 11,
                 "file" : "/home/kisung/Desktop/T4Gauss/src/help_dmvnorm.cpp",
                 "kind" : 6,
@@ -22,6 +76,45 @@
         ],
         "file" : "/home/kisung/Desktop/T4Gauss/src/help_dmvnorm.cpp",
         "file_last_write" : 1574918942
+    },
+    {
+        "definitions" : [
+            {
+                "column" : 12,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_gmm.cpp",
+                "kind" : 6,
+                "line" : 9,
+                "name" : "arma_gmm_full(arma::mat &, int, int)",
+                "parent_name" : "",
+                "usr" : "c:@F@arma_gmm_full#&$@N@arma@C@Mat>#d#I#I#"
+            },
+            {
+                "column" : 12,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_gmm.cpp",
+                "kind" : 6,
+                "line" : 24,
+                "name" : "arma_gmm_diag(arma::mat &, int, int)",
+                "parent_name" : "",
+                "usr" : "c:@F@arma_gmm_diag#&$@N@arma@C@Mat>#d#I#I#"
+            }
+        ],
+        "file" : "/home/kisung/Desktop/T4Gauss/src/help_gmm.cpp",
+        "file_last_write" : 1575091352
+    },
+    {
+        "definitions" : [
+            {
+                "column" : 12,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_interpolate.cpp",
+                "kind" : 6,
+                "line" : 11,
+                "name" : "wass2_interp(arma::vec, arma::vec, arma::mat, arma::mat, double)",
+                "parent_name" : "",
+                "usr" : "c:@F@wass2_interp#$@N@arma@C@Col>#d#S0_#$@N@arma@C@Mat>#d#S1_#d#"
+            }
+        ],
+        "file" : "/home/kisung/Desktop/T4Gauss/src/help_interpolate.cpp",
+        "file_last_write" : 1575164119
     },
     {
         "definitions" : [

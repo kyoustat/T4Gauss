@@ -24,6 +24,9 @@ NULL
 wrapgauss1d <- function(mean, sd){
   #######################################################
   # Preprocessing
+  if (nargs() < 2){
+    stop("* wrapgauss1d : this function needs exactly two variables 'mean' and 'sd'.")
+  }
   mymean = base::as.double(mean)
   mysd   = base::as.double(sd)
   
@@ -52,6 +55,9 @@ wrapgauss1d <- function(mean, sd){
 wrapgaussNd <- function(mu, sigma){
   #######################################################
   # Preprocessing
+  if (nargs() < 2){
+    stop("* wrapgaussNd : this function needs exactly two variables 'mu' and 'sigma'.")
+  }
   mymean  = as.vector(mu)
   mysigma = as.matrix(sigma)
   if (!check_musigma(mymean, mysigma)){
