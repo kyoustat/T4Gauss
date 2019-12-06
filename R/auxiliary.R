@@ -2,7 +2,7 @@
 #   (1) check_number     : check univariate number
 #   (2) check_musigma    : check mu (mean) and sigma (covariance)
 #   (3) check_list_gauss : check whether a list of gaussian distributions
-
+#   (4) aux_whichmin     : find the minimal index
 
 
 # (1) check_number --------------------------------------------------------
@@ -22,7 +22,6 @@ check_number <- function(x, pos=TRUE){
   }
 }
 
-
 # (2) check_musigma -------------------------------------------------------
 #' @keywords internal
 #' @noRd
@@ -38,7 +37,6 @@ check_musigma <- function(x, sigma){
     return(FALSE)
   }
 }
-
 
 # (3) check_list_gauss ----------------------------------------------------
 #' @keywords internal
@@ -56,3 +54,18 @@ check_list_gauss <- function(wglist){
     return(FALSE)
   }
 }
+
+# (4) aux_whichmin --------------------------------------------------------
+#' @keywords internal
+#' @noRd
+aux_whichmin <- function(vec){
+  mval = base::min(vec)
+  idlarge = which(vec<=mval)
+  if (length(idlarge)==1){
+    return(idlarge)
+  } else {
+    return(base::sample(idlarge, 1))
+  }
+}
+
+

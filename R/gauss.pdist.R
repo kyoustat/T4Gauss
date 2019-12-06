@@ -47,10 +47,10 @@
 #' }
 #' 
 #' @export
-gauss.pdist <- function(x, y=NULL, method=c("wass2"), as.dist=FALSE){
+gauss.pdist <- function(x, y=NULL, type=c("wass2"), as.dist=FALSE){
   #######################################################
   # Preprocessing
-  mymethod = match.arg(method)
+  mymethod = match.arg(type)
   mydist   = as.logical(as.dist)
   if (is.list(x)){
     if (!check_list_gauss(x)){
@@ -73,10 +73,7 @@ gauss.pdist <- function(x, y=NULL, method=c("wass2"), as.dist=FALSE){
   
   #######################################################
   # Computation with Branching
-  output = switch(mymethod,
-                  wass2 = gauss.pdist.wass2(dglist)
-  )
-  
+  output = gauss.pdist.selector(dglist, mymethod)
   
   #######################################################
   # Return
@@ -90,8 +87,18 @@ gauss.pdist <- function(x, y=NULL, method=c("wass2"), as.dist=FALSE){
 
 
 # auxiliary functions, methods --------------------------------------------
-# (1) gauss.pdist.wass2 : 2-wasserstein distance
+# (0) gauss.pdist.selector : select the one
+# (1) gauss.pdist.wass2    : 2-wasserstein distance
 
+
+# (0) gauss.pdist.selector ------------------------------------------------
+#' @keywords internal
+#' @noRd
+gauss.pdist.selector <- function(dglist, mytype){
+  output = switch(mytype,
+                  wass2 = gauss.pdist.wass2(dglist))
+  return(output)
+}
 
 
 

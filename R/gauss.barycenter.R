@@ -1,41 +1,53 @@
 #' Barycenter of Gaussian Distributions
 #' 
 #' @export
-barygauss <- function(x, y=NULL, method=c("wass2")){
+gauss.barycenter <- function(x, y=NULL, type=c("wass2")){
   #######################################################
   # Preprocessing
-  mymethod = match.arg(method)
+  mymethod = match.arg(type)
   if (is.list(x)){
     if (!check_list_gauss(x)){
-      stop("* barygauss : input 'x' should be a list of 'wrapgauss' objects having same dimension.")
+      stop("* gauss.barycenter : input 'x' should be a list of 'wrapgauss' objects having same dimension.")
     }
     dglist = x
   } else {
     xcond = base::inherits(x, "wrapgauss")
     ycond = base::inherits(y, "wrapgauss")
     if (!(xcond&&ycond)){
-      stop(" barygauss : input 'x' and 'y' should be of class 'wrapgauss'.")
+      stop(" gauss.barycenter : input 'x' and 'y' should be of class 'wrapgauss'.")
     }
     dglist = list()
     dglist[[1]] = x
     dglist[[2]] = y
     if (!check_list_gauss(dglist)){
-      stop("* barygauss : 'x' and 'y' seem to be inconsistent.")
+      stop("* gauss.barycenter : 'x' and 'y' seem to be inconsistent.")
     }
   }
   
-  #######################################################
-  # Computation
-  lambdas = rep(1, length(dglist))
-  output  = switch(mymethod, 
-                   wass2 = barygauss_wass2(dglist, lambdas))
   
   #######################################################
-  # Return output
-  return(output)
+  # Set the weight
+  lambdas = rep(1, length(dglist))/length(dglist)
+  
+  #######################################################
+  # Compute and Return
+  return(barygauss_selection(dglist, lambdas, mymethod))
 }
 
 
+
+# auxiliary functions -----------------------------------------------------
+# (0) switching argument
+# (1) type : wass2
+
+# (0) switching argument --------------------------------------------------
+#' @keywords internal
+#' @noRd
+barygauss_selection <- function(dglist, lbd=(rep(1,length(dglist))/length(dglist)), method){
+  output = switch(method,
+                  wass2 = barygauss_wass2(dglist, lbd))
+  return(output)
+}
 
 # (1) wass2 ---------------------------------------------------------------
 #' @keywords internal
