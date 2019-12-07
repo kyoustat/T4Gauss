@@ -4,7 +4,7 @@
 \alias{gauss.sample}
 \title{Draw random samples from Gaussian distribution via 'wrapgauss' object}
 \usage{
-gauss.sample(n, wgauss)
+gauss.sample(n = 100, obj.gauss)
 }
 \description{
 It's a wrapper for 'rmvnorm' and 'rmvnorm'
