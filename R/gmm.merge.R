@@ -5,7 +5,7 @@
 gmm.merge <- function(gmmlist, k=2, ctype=c("kmeans","kmedoids")){
   #######################################################
   # Preprocessing
-  if (!check_list_gmm(glist)){
+  if (!check_list_gmm(gmmlist)){
     stop("* gmm.merge : input 'gmmlist' should be a list of 'wrapgauss' objects having same dimension.")
   }
   mynlist = length(gmmlist)
@@ -53,7 +53,7 @@ gmm.merge <- function(gmmlist, k=2, ctype=c("kmeans","kmedoids")){
   
   #################################################################
   # Step 3. Use RiemSphere to compute mean element of Simplex
-  cweight = (as.vector(mle.spnorm(sqrt(cprops), method="Optimize")$mu)^2)
+  cweight = (as.vector(mle.spnorm(sqrt(cprops), method="Newton")$mu)^2)
   cweight = cweight/sum(cweight)
   
   #################################################################
@@ -61,6 +61,41 @@ gmm.merge <- function(gmmlist, k=2, ctype=c("kmeans","kmedoids")){
   myobj = wrapgmm(clist, weight=cweight)
   return(myobj)
 }
+
+# 
+# # test with 'mlbench.smiley'
+# library(mlbench)
+# library(microbenchmark)
+# 
+# # generate data
+# myk = 5
+# myn = 100000
+# smiley.large = mlbench.smiley(n=myn)
+# smiley.small = list()
+# for (i in 1:10){
+#   smiley.small[[i]] = mlbench.smiley(n=round(myn/10))
+# }
+# slx = smiley.large$x
+# 
+# # run 1. large object
+# obj.large = fitgmm(smiley.large$x, k=myk)$gmmobj
+# 
+# # run 2. small object
+# obj.parts = list()
+# for (i in 1:10){
+#   obj.parts[[i]] = fitgmm(smiley.small[[i]]$x, k=myk)$gmmobj
+#   print(paste("iteration ",i,"/10 complete.", sep=""))
+# }
+# obj.small = gmm.merge(obj.parts, k=myk)
+# 
+# # let's try visualization
+# lab.large = gmm.eval(slx, obj.large)$cluster
+# lab.small = gmm.eval(slx, obj.small)$cluster
+# 
+# par(mfrow=c(1,2))
+# plot(slx, pch=19, cex=0.1, col=lab.large, main=paste("fit full for k=",myk,sep=""))
+# plot(slx, pch=19, cex=0.1, col=lab.small, main=paste("fit divided for k=",myk,sep=""))
+
 
 
 # # 

@@ -20,14 +20,15 @@ wrapgmm <- function(wglist, weight=rep(1/length(wglist), length(wglist))){
     stop("* wrapgmm : 'wglist' should be a list of 'wrapgauss' objects having same dimension.")
   }
   #   4. weight
-  if ((!is.vector(weight))||(sum(weight)!=1)||(length(weight)!=length(wglist))){
-    stop("* wrapgmm : 'weight' should be a vector of same length as 'wglist' which sums to 1.")
+  if ((!is.vector(weight))||(length(weight)!=length(wglist))){
+    stop("* wrapgmm : 'weight' should be a vector of same length as 'wglist'.")
   }
-  
+  myweight = weight/sum(weight)
+
   #######################################################
   # Wrap it
   theobj = list()
   theobj$wglist = wglist
-  theobj$weight = weight
+  theobj$weight = myweight
   return(structure(theobj, class="wrapgmm"))
 }
