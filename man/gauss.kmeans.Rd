@@ -13,13 +13,13 @@ K-Means clustering for Gaussian Distributions
 ## generate three-cluster data with univariate Gaussians
 mylist = list()
 for (i in 1:10){
-   mylist[[i]] = wrapgauss1d(mean=-2, sd=1)
+   mylist[[i]] = wrapgauss1d(mean=-2-runif(1), sd=runif(1))
 }
 for (i in 11:20){
-   mylist[[i]] = wrapgauss1d(mean=0, sd=1)
+   mylist[[i]] = wrapgauss1d(mean=0, sd=runif(1))
 }
 for (i in 21:30){
-   mylist[[i]] = wrapgauss1d(mean=2, sd=1)
+   mylist[[i]] = wrapgauss1d(mean=2+runif(1), sd=runif(1))
 }
 
 ## apply clustering with different k values

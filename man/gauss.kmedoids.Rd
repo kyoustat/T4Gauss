@@ -25,13 +25,13 @@ by \pkg{cluster} package. See \code{\link[cluster]{pam}} for more details.
 ## generate three-cluster data with univariate Gaussians
 mylist = list()
 for (i in 1:10){
-   mylist[[i]] = wrapgauss1d(mean=runif(1)-5, sd=runif(1))
+   mylist[[i]] = wrapgauss1d(mean=-2-runif(1), sd=runif(1))
 }
 for (i in 11:20){
-   mylist[[i]] = wrapgauss1d(mean=runif(1), sd=runif(1))
+   mylist[[i]] = wrapgauss1d(mean=0, sd=runif(1))
 }
 for (i in 21:30){
-   mylist[[i]] = wrapgauss1d(mean=runif(1)+5, sd=runif(1))
+   mylist[[i]] = wrapgauss1d(mean=2+runif(1), sd=runif(1))
 }
 
 ## apply clustering with different k values

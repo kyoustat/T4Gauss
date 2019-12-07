@@ -57,9 +57,6 @@ gauss.kmeans <- function(glist, k=2, type=c("wass2"), maxiter = 100){
     label.new = as.integer(as.factor(base::apply(pdmat, 1, aux_whichmin)))
     label.new = gauss.kmeans.label.adjust(glist, label.new, myk)
 
-    print(label.old)
-    print(label.new)
-
     # Update Step
     center.new = gauss.kmeans.center(glist, label.new, myk, mytype)
 

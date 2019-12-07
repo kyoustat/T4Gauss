@@ -2,7 +2,7 @@
 #   (1) check_number     : check univariate number
 #   (2) check_musigma    : check mu (mean) and sigma (covariance)
 #   (3) check_list_gauss : check whether a list of gaussian distributions
-#   (4) aux_whichmin     : find the minimal index
+#   (4) check_list_gmm   : check whether a list of GMM models
 
 
 # (1) check_number --------------------------------------------------------
@@ -55,17 +55,20 @@ check_list_gauss <- function(wglist){
   }
 }
 
-# (4) aux_whichmin --------------------------------------------------------
+# (4) check_list_gmm ------------------------------------------------------
 #' @keywords internal
 #' @noRd
-aux_whichmin <- function(vec){
-  mval = base::min(vec)
-  idlarge = which(vec<=mval)
-  if (length(idlarge)==1){
-    return(idlarge)
+check_list_gmm <- function(gmmlist){
+  extract_dimension <- function(myobj){
+    return(round(myobj$wglist[[1]]$dimension))
+  }
+  cond1 = is.list(gmmlist)
+  cond2 = (all(unlist(lapply(gmmlist, inherits, "wrapgmm"))==TRUE))
+  cond3 = (length(unique(unlist(lapply(gmmlist, extract_dimension))))==1)
+  if (cond1&&cond2&&cond3){
+    return(TRUE)
   } else {
-    return(base::sample(idlarge, 1))
+    return(FALSE)
   }
 }
-
 
