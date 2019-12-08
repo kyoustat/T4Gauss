@@ -62,18 +62,19 @@ gmm.merge <- function(gmmlist, k=2, ctype=c("kmeans","kmedoids")){
   return(myobj)
 }
 
-# 
+
 # # test with 'mlbench.smiley'
 # library(mlbench)
 # library(microbenchmark)
 # 
 # # generate data
-# myk = 5
+# myk = 4
 # myn = 100000
-# smiley.large = mlbench.smiley(n=myn)
+# mysd = 0.1
+# smiley.large = mlbench.smiley(n=myn, sd1=mysd, sd2=mysd/2)
 # smiley.small = list()
 # for (i in 1:10){
-#   smiley.small[[i]] = mlbench.smiley(n=round(myn/10))
+#   smiley.small[[i]] = mlbench.smiley(n=round(myn/10), sd1=mysd, sd2=mysd/2)
 # }
 # slx = smiley.large$x
 # 
@@ -92,11 +93,23 @@ gmm.merge <- function(gmmlist, k=2, ctype=c("kmeans","kmedoids")){
 # lab.large = gmm.eval(slx, obj.large)$cluster
 # lab.small = gmm.eval(slx, obj.small)$cluster
 # 
+# graphics.off()
 # par(mfrow=c(1,2))
-# plot(slx, pch=19, cex=0.1, col=lab.large, main=paste("fit full for k=",myk,sep=""))
-# plot(slx, pch=19, cex=0.1, col=lab.small, main=paste("fit divided for k=",myk,sep=""))
-
-
+# plot(slx, pch=19, cex=0.05, col=lab.large, main=paste("fit full for k=",myk,sep=""), axes=FALSE)
+# plot(slx, pch=19, cex=0.05, col=lab.small, main=paste("fit divided for k=",myk,sep=""), axes=FALSE)
+# 
+# 
+# ## let's wrap it as a function
+# func.large <- function(x, k){
+#   return(fitgmm(x, k=k)$gmmobj)
+# }
+# func.small <- function(x, k, g=3){
+#   
+# }
+# 
+# xx = split(1:20,cut(1:20,seq(0,20,length.out=5), labels=FALSE))
+# 
+# (split(1:20, ceiling(seq_along(1:20)/5), labe))
 
 # # 
 # x1 = rmvnorm(50, mean=rep(-1,4))

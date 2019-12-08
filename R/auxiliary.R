@@ -30,10 +30,15 @@ check_musigma <- function(x, sigma){
   cond2 = (all(!is.infinite(x))&&all(!is.na(x)))
   cond3 = is.matrix(sigma)
   cond4 = (length(x)==nrow(sigma))
-  cond5 = base::isSymmetric(sigma)
+  cond5 = base::isSymmetric(sigma, tol=sqrt(.Machine$double.eps))
   if (cond1&&cond2&&cond3&&cond4&&cond5){
     return(TRUE)
   } else {
+    if (!cond1){stop("* check_musigma : error 1 : not a vector mean.")}
+    if (!cond2){stop("* check_musigma : error 2 : mean contains Inf/NaNs.")}
+    if (!cond3){stop("* check_musigma : error 3 : 'sigma' is not a matrix.")}
+    if (!cond4){stop("* check_musigma : error 4 : dimensions do not match.")}
+    if (!cond5){stop("* check_musigma : error 5 : covariance is not symmetric.")}
     return(FALSE)
   }
 }
