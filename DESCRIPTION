@@ -9,4 +9,4 @@ Imports: Rcpp, RcppZiggurat, Rdpack, stats, utils
 Encoding: UTF-8
 RdMacros: Rdpack
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 7.0.1
+RoxygenNote: 7.0.2
