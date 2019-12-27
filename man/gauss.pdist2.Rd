@@ -4,7 +4,7 @@
 \alias{gauss.pdist2}
 \title{Pairwise Distances between two sets of Gaussian distributions}
 \usage{
-gauss.pdist2(glist1, glist2, method = c("wass2"))
+gauss.pdist2(glist1, glist2, type = c("wass2"))
 }
 \description{
 Pairwise Distances between two sets of Gaussian distributions

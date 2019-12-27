@@ -2,12 +2,12 @@
 #' 
 #' 
 #' @export
-gauss.pdist2 <- function(glist1, glist2, method=c("wass2")){
+gauss.pdist2 <- function(glist1, glist2, type=c("wass2")){
   #######################################################
   # Preprocessing
-  mymethod = match.arg(method)
-  xcond = base::inherits(glist1, "wrapgauss")
-  ycond = base::inherits(glist2, "wrapgauss")
+  mymethod = match.arg(type)
+  xcond = all(unlist(lapply(glist1, inherits, "wrapgauss"))==TRUE)
+  ycond = all(unlist(lapply(glist2, inherits, "wrapgauss"))==TRUE)
   if (!(xcond&&ycond)){
     stop(" gauss.pdist2 : input 'glist1' and 'glist2' should be of class 'wrapgauss'.")
   }
@@ -22,22 +22,27 @@ gauss.pdist2 <- function(glist1, glist2, method=c("wass2")){
   }
   
   #######################################################
-  # Computation
-  output = switch(mymethod,
-                  wass2 = gauss.pdist2.wass2(glist1, glist2))
-  
-  
-  #######################################################
-  # Return
-  return(output)
+  # Compute and Return
+  return(gauss.pdist2.selector(glist1, glist2, mymethod))
 }
 
 
 
 # auxiliary functions -----------------------------------------------------
+# (0) gauss.pdist2.selector
 # (1) gauss.pdist2.wass2 
 
 
+
+
+# (0) gauss.pdist2.selector -----------------------------------------------
+#' @keywords internal
+#' @noRd
+gauss.pdist2.selector <- function(glist1, glist2, mytype){
+  output = switch(mytype,
+                  wass2 = gauss.pdist2.wass2(glist1, glist2))
+  return(output)
+}
 
 # (1) gauss.pdist2.wass2 --------------------------------------------------
 #' @keywords internal

@@ -4,28 +4,45 @@
 #' 
 #' @examples 
 #' ## test with 1-dimensional Gaussian distributions
-#' obj1 = wrapgauss1d(mean=1, sd=1)
-#' obj5 = wrapgauss1d(mean=5, sd=5)
+#' objA = wrapgauss1d(mean=1, sd=0.5)
+#' objZ = wrapgauss1d(mean=5, sd=2)
 #' 
-#' ## let's interpolate
-#' obj.half  = interpgauss(obj1, obj5, t=0.5)
+#' ## let's interpolate for t=0.1 to t=0.9
+#' vec.t   = seq(from=0.1, to=0.9, by=0.1)
+#' vec.obj = list()
+#' for (i in 1:9){
+#'    vec.obj[[i]] = gauss.interp(objA, objZ, t=vec.t[i])
+#' }
+#' 
+#' ## let's visualize
+#' draw.x = seq(from=-3, to=11, length.out=1234)
+#' draw.A = gauss.eval(draw.x, objA)
+#' draw.Z = gauss.eval(draw.x, objZ)
+#' 
+#' plot(draw.x, draw.A, type="l", xlim=c(-1,11), ylim=c(0,1), lwd=2,
+#'      xlab="x", ylab="y", main="Interpolated Gaussians between Two Black")
+#' lines(draw.x, draw.Z, lwd=2)
+#' for (i in 1:9){
+#'   draw.t = gauss.eval(draw.x, vec.obj[[i]])
+#'   lines(draw.x, draw.t, col=(i+1), lty=2, lwd=0.5)
+#' }
 #' 
 #' 
 #' @export
-interpgauss <- function(gauss1, gauss2, t=0.5, method=c("wass2")){
+gauss.interp <- function(gauss1, gauss2, t=0.5, method=c("wass2")){
   #######################################################
   # Preprocessing
   if (!inherits(gauss1, "wrapgauss")){
-    stop("* interpgauss : an input 'gauss1' should be a S3 object of class 'wrapgauss'.")
+    stop("* gauss.interp : an input 'gauss1' should be a S3 object of class 'wrapgauss'.")
   }
   if (!inherits(gauss2, "wrapgauss")){
-    stop("* interpgauss : an input 'gauss2' should be a S3 object of class 'wrapgauss'.")
+    stop("* gauss.interp : an input 'gauss2' should be a S3 object of class 'wrapgauss'.")
   }
   if ((length(t)>1)||(t>=1)||(t<=0)){
-    stop("* interpgauss : 't' should be a real number in (0,1).")
+    stop("* gauss.interp : 't' should be a real number in (0,1).")
   }
   if (gauss1$dimension!=gauss2$dimension){
-    stop("* interpgauss : two 'wrapgauss' objects should be of same dimension.")
+    stop("* gauss.interp : two 'wrapgauss' objects should be of same dimension.")
   }
   mymethod = match.arg(method)
   

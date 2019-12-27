@@ -14,8 +14,8 @@ x1 = rmvnorm(50, mean=rep(-1,4))
 x2 = rmvnorm(50, mean=rep(+1,4))
 xx = rbind(x1, x2)
 
-cl1 = fitgmm(xx, k=1)$criteria
-cl2 = fitgmm(xx, k=2)$criteria
+cl1 = fitgmm(xx, k=1)
+cl2 = fitgmm(xx, k=2)
 cl3 = fitgmm(xx, k=3)
 
 cls = array(0,c(10,3))

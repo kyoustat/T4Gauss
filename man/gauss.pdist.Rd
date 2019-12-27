@@ -4,7 +4,7 @@
 \alias{gauss.pdist}
 \title{Pairwise Distance between Gaussian distributions}
 \usage{
-gauss.pdist(x, y = NULL, method = c("wass2"), as.dist = FALSE)
+gauss.pdist(x, y = NULL, type = c("wass2"), as.dist = FALSE)
 }
 \description{
 Pairwise Distance between Gaussian distributions
