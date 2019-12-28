@@ -2,32 +2,46 @@
 % Please edit documentation in R/gauss.pdist.R
 \name{gauss.pdist}
 \alias{gauss.pdist}
-\title{Pairwise Distance between Gaussian distributions}
+\title{Pairwise Distance/Dissimilarities between Gaussian distributions}
 \usage{
-gauss.pdist(x, y = NULL, type = c("wass2"), as.dist = FALSE)
+gauss.pdist(
+  x,
+  y = NULL,
+  type = c("bh", "cs", "kl", "skl", "wass2"),
+  as.dist = FALSE
+)
 }
 \description{
-Pairwise Distance between Gaussian distributions
+Pairwise Distance/Dissimilarities between Gaussian distributions
 }
 \examples{
 ## test with 1-dimensional Gaussian distributions
 list1d = list()
-for (i in 1:20){
+for (i in 1:15){
    val.center  = rnorm(1, sd=0.25)
-   list1d[[i]] = wrapgauss1d(mean=val.center, sd=1)
+   val.sd      = runif(1, min=0.75,max=1)
+   list1d[[i]] = wrapgauss1d(mean=val.center, sd=val.sd)
 }
-for (j in 21:40){
-   val.center  = rnorm(1, sd=0.25) + 2
-   list1d[[j]] = wrapgauss1d(mean=val.center, sd=1)
+for (j in 16:40){
+   val.center  = rnorm(1, sd=0.25) + 10
+   val.sd      = runif(1, min=4.75,max=5)
+   list1d[[j]] = wrapgauss1d(mean=val.center, sd=val.sd)
 }
 
 ## compute pairwise distance 
-d1wass2 = gauss.pdist(list1d)
+d1wass2 = gauss.pdist(list1d, type="wass2")
+d1kl    = gauss.pdist(list1d, type="kl")
+d1skl   = gauss.pdist(list1d, type="skl")
+d1cs    = gauss.pdist(list1d, type="cs")
+d1bh    = gauss.pdist(list1d, type="bh")
 
 ## visualize
-gcol <- gray((0:64)/64)
-opar <- par(pty="s")
-image(d1wass2[,40:1], col=gcol, axes=FALSE, main="wass2 pairwise distance")
+opar <- par(mfrow=c(2,3), pty="s")
+image(d1wass2[,40:1], axes=FALSE, main="pdist: 2-Wasserstein")
+image(d1kl[,40:1],    axes=FALSE, main="pdist: KL")
+image(d1skl[,40:1],   axes=FALSE, main="pdist: Symmetric KL")
+image(d1cs[,40:1],    axes=FALSE, main="pdist: Cauchy-Schwarz")
+image(d1bh[,40:1],    axes=FALSE, main="pdist: Bhattacharyya")
 par(opar)
 
 \dontrun{
@@ -37,20 +51,27 @@ for (i in 1:20){
    vec.center  = rmvnorm(1, mean=rep(0,5))
    list5d[[i]] = wrapgaussNd(mu=vec.center, sigma=diag(5))
 }
-mysig = matrix(rnorm(100*5), ncol=5)
-mysig = t(mysig)\%*\%mysig
 for (j in 21:40){
    vec.center  = rmvnorm(1, mean=rep(0,5)+1.5)
+   mysig = matrix(rnorm(100*5), ncol=5)
+   mysig = t(mysig)\%*\%mysig
    list5d[[j]] = wrapgaussNd(mu=vec.center, sigma=mysig)
 }
 
 ## compute pairwise distance
-d5wass2 = gauss.pdist(list5d)
+d5wass2 = gauss.pdist(list5d, type="wass2")
+d5kl    = gauss.pdist(list5d, type="kl")
+d5skl   = gauss.pdist(list5d, type="skl")
+d5cs    = gauss.pdist(list5d, type="cs")
+d5bh    = gauss.pdist(list5d, type="bh")
 
 ## visualize
-gcol <- gray((0:64)/64)
-opar <- par(pty="s")
-image(d5wass2[,40:1], col=gcol, axes=FALSE, main="wass2 pairwise distance")
+opar <- par(mfrow=c(2,3), pty="s")
+image(d5wass2[,40:1], axes=FALSE, main="pdist: 2-Wasserstein")
+image(d5kl[,40:1],    axes=FALSE, main="pdist: KL")
+image(d5skl[,40:1],   axes=FALSE, main="pdist: Symmetric KL")
+image(d5cs[,40:1],    axes=FALSE, main="pdist: Cauchy-Schwarz")
+image(d5bh[,40:1],    axes=FALSE, main="pdist: Bhattacharyya")
 par(opar)
 }
 

@@ -56,6 +56,98 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// kl_dist
+arma::mat kl_dist(arma::mat mean3, arma::cube covs3);
+RcppExport SEXP _T4Gauss_kl_dist(SEXP mean3SEXP, SEXP covs3SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type mean3(mean3SEXP);
+    Rcpp::traits::input_parameter< arma::cube >::type covs3(covs3SEXP);
+    rcpp_result_gen = Rcpp::wrap(kl_dist(mean3, covs3));
+    return rcpp_result_gen;
+END_RCPP
+}
+// kl_dist2
+arma::mat kl_dist2(arma::mat mean1, arma::cube covs1, arma::mat mean2, arma::cube covs2);
+RcppExport SEXP _T4Gauss_kl_dist2(SEXP mean1SEXP, SEXP covs1SEXP, SEXP mean2SEXP, SEXP covs2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type mean1(mean1SEXP);
+    Rcpp::traits::input_parameter< arma::cube >::type covs1(covs1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type mean2(mean2SEXP);
+    Rcpp::traits::input_parameter< arma::cube >::type covs2(covs2SEXP);
+    rcpp_result_gen = Rcpp::wrap(kl_dist2(mean1, covs1, mean2, covs2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// skl_dist2
+arma::mat skl_dist2(arma::mat mean1, arma::cube covs1, arma::mat mean2, arma::cube covs2);
+RcppExport SEXP _T4Gauss_skl_dist2(SEXP mean1SEXP, SEXP covs1SEXP, SEXP mean2SEXP, SEXP covs2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type mean1(mean1SEXP);
+    Rcpp::traits::input_parameter< arma::cube >::type covs1(covs1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type mean2(mean2SEXP);
+    Rcpp::traits::input_parameter< arma::cube >::type covs2(covs2SEXP);
+    rcpp_result_gen = Rcpp::wrap(skl_dist2(mean1, covs1, mean2, covs2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cs_dist
+arma::mat cs_dist(arma::mat mean3, arma::cube covs3);
+RcppExport SEXP _T4Gauss_cs_dist(SEXP mean3SEXP, SEXP covs3SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type mean3(mean3SEXP);
+    Rcpp::traits::input_parameter< arma::cube >::type covs3(covs3SEXP);
+    rcpp_result_gen = Rcpp::wrap(cs_dist(mean3, covs3));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cs_dist2
+arma::mat cs_dist2(arma::mat mean1, arma::cube covs1, arma::mat mean2, arma::cube covs2);
+RcppExport SEXP _T4Gauss_cs_dist2(SEXP mean1SEXP, SEXP covs1SEXP, SEXP mean2SEXP, SEXP covs2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type mean1(mean1SEXP);
+    Rcpp::traits::input_parameter< arma::cube >::type covs1(covs1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type mean2(mean2SEXP);
+    Rcpp::traits::input_parameter< arma::cube >::type covs2(covs2SEXP);
+    rcpp_result_gen = Rcpp::wrap(cs_dist2(mean1, covs1, mean2, covs2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// bh_dist
+arma::mat bh_dist(arma::mat mean3, arma::cube covs3);
+RcppExport SEXP _T4Gauss_bh_dist(SEXP mean3SEXP, SEXP covs3SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type mean3(mean3SEXP);
+    Rcpp::traits::input_parameter< arma::cube >::type covs3(covs3SEXP);
+    rcpp_result_gen = Rcpp::wrap(bh_dist(mean3, covs3));
+    return rcpp_result_gen;
+END_RCPP
+}
+// bh_dist2
+arma::mat bh_dist2(arma::mat mean1, arma::cube covs1, arma::mat mean2, arma::cube covs2);
+RcppExport SEXP _T4Gauss_bh_dist2(SEXP mean1SEXP, SEXP covs1SEXP, SEXP mean2SEXP, SEXP covs2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type mean1(mean1SEXP);
+    Rcpp::traits::input_parameter< arma::cube >::type covs1(covs1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type mean2(mean2SEXP);
+    Rcpp::traits::input_parameter< arma::cube >::type covs2(covs2SEXP);
+    rcpp_result_gen = Rcpp::wrap(bh_dist2(mean1, covs1, mean2, covs2));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_dmvnorm
 arma::vec cpp_dmvnorm(arma::mat& X, arma::vec mean, arma::mat Sigma);
 RcppExport SEXP _T4Gauss_cpp_dmvnorm(SEXP XSEXP, SEXP meanSEXP, SEXP SigmaSEXP) {
@@ -159,6 +251,13 @@ static const R_CallMethodDef CallEntries[] = {
     {"_T4Gauss_wass2_barycenter", (DL_FUNC) &_T4Gauss_wass2_barycenter, 3},
     {"_T4Gauss_wass2_dist", (DL_FUNC) &_T4Gauss_wass2_dist, 2},
     {"_T4Gauss_wass2_dist2", (DL_FUNC) &_T4Gauss_wass2_dist2, 4},
+    {"_T4Gauss_kl_dist", (DL_FUNC) &_T4Gauss_kl_dist, 2},
+    {"_T4Gauss_kl_dist2", (DL_FUNC) &_T4Gauss_kl_dist2, 4},
+    {"_T4Gauss_skl_dist2", (DL_FUNC) &_T4Gauss_skl_dist2, 4},
+    {"_T4Gauss_cs_dist", (DL_FUNC) &_T4Gauss_cs_dist, 2},
+    {"_T4Gauss_cs_dist2", (DL_FUNC) &_T4Gauss_cs_dist2, 4},
+    {"_T4Gauss_bh_dist", (DL_FUNC) &_T4Gauss_bh_dist, 2},
+    {"_T4Gauss_bh_dist2", (DL_FUNC) &_T4Gauss_bh_dist2, 4},
     {"_T4Gauss_cpp_dmvnorm", (DL_FUNC) &_T4Gauss_cpp_dmvnorm, 3},
     {"_T4Gauss_arma_gmm_full", (DL_FUNC) &_T4Gauss_arma_gmm_full, 3},
     {"_T4Gauss_arma_gmm_diag", (DL_FUNC) &_T4Gauss_arma_gmm_diag, 3},

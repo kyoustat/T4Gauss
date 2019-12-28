@@ -17,6 +17,34 @@ wass2_dist2 <- function(mean1, mean2, covs1, covs2) {
     .Call('_T4Gauss_wass2_dist2', PACKAGE = 'T4Gauss', mean1, mean2, covs1, covs2)
 }
 
+kl_dist <- function(mean3, covs3) {
+    .Call('_T4Gauss_kl_dist', PACKAGE = 'T4Gauss', mean3, covs3)
+}
+
+kl_dist2 <- function(mean1, covs1, mean2, covs2) {
+    .Call('_T4Gauss_kl_dist2', PACKAGE = 'T4Gauss', mean1, covs1, mean2, covs2)
+}
+
+skl_dist2 <- function(mean1, covs1, mean2, covs2) {
+    .Call('_T4Gauss_skl_dist2', PACKAGE = 'T4Gauss', mean1, covs1, mean2, covs2)
+}
+
+cs_dist <- function(mean3, covs3) {
+    .Call('_T4Gauss_cs_dist', PACKAGE = 'T4Gauss', mean3, covs3)
+}
+
+cs_dist2 <- function(mean1, covs1, mean2, covs2) {
+    .Call('_T4Gauss_cs_dist2', PACKAGE = 'T4Gauss', mean1, covs1, mean2, covs2)
+}
+
+bh_dist <- function(mean3, covs3) {
+    .Call('_T4Gauss_bh_dist', PACKAGE = 'T4Gauss', mean3, covs3)
+}
+
+bh_dist2 <- function(mean1, covs1, mean2, covs2) {
+    .Call('_T4Gauss_bh_dist2', PACKAGE = 'T4Gauss', mean1, covs1, mean2, covs2)
+}
+
 cpp_dmvnorm <- function(X, mean, Sigma) {
     .Call('_T4Gauss_cpp_dmvnorm', PACKAGE = 'T4Gauss', X, mean, Sigma)
 }

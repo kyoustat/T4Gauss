@@ -4,8 +4,50 @@
 \alias{gauss.pdist2}
 \title{Pairwise Distances between two sets of Gaussian distributions}
 \usage{
-gauss.pdist2(glist1, glist2, type = c("wass2"))
+gauss.pdist2(glist1, glist2, type = c("bh", "cs", "kl", "skl", "wass2"))
 }
 \description{
 Pairwise Distances between two sets of Gaussian distributions
+}
+\examples{
+## test with 1-dimensional Gaussian distributions
+list1dA = list()
+list1dB = list()
+for (i in 1:5){
+   val.center  = rnorm(1, sd=0.25)
+   val.sd      = runif(1, min=0.75,max=1)
+   list1dA[[i]] = wrapgauss1d(mean=val.center, sd=val.sd)
+}
+for (i in 6:10){
+   val.center  = rnorm(1, sd=0.25) + 10
+   val.sd      = runif(1, min=4.75,max=5)
+   list1dA[[i]] = wrapgauss1d(mean=val.center, sd=val.sd)
+}
+for (j in 1:11){
+   val.center   = rnorm(1, sd=0.25)
+   val.sd       = runif(1, min=0.75,max=1)
+   list1dB[[j]] = wrapgauss1d(mean=val.center, sd=val.sd)
+}
+for (j in 12:25){
+   val.center  = rnorm(1, sd=0.25) + 10
+   val.sd      = runif(1, min=4.75,max=5)
+   list1dB[[j]] = wrapgauss1d(mean=val.center, sd=val.sd)
+}
+
+## compute pairwise distance 
+d1wass2 = gauss.pdist2(list1dA, list1dB, type="wass2")
+d1kl    = gauss.pdist2(list1dA, list1dB, type="kl")
+d1skl   = gauss.pdist2(list1dA, list1dB, type="skl")
+d1cs    = gauss.pdist2(list1dA, list1dB, type="cs")
+d1bh    = gauss.pdist2(list1dA, list1dB, type="bh")
+
+## visualize
+opar <- par(mfrow=c(2,3))
+image(d1wass2, axes=FALSE, main="pdist2: 2-Wasserstein")
+image(d1kl,    axes=FALSE, main="pdist2: KL")
+image(d1skl,   axes=FALSE, main="pdist2: Symmetric KL")
+image(d1cs,    axes=FALSE, main="pdist2: Cauchy-Schwarz")
+image(d1bh,    axes=FALSE, main="pdist2: Bhattacharyya")
+par(opar)
+
 }
