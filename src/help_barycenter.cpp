@@ -11,7 +11,7 @@ using namespace arma;
 
 // (1) wass2_barycenter
 // [[Rcpp::export]]
-Rcpp::List wass2_barycenter(arma::mat mean3, arma::cube covs3, arma::vec lambdas){
+Rcpp::List wass2_barycenter(arma::mat mean3, arma::cube covs3, arma::vec lambdas, int maxiter, double eps){
   // parameters
   int N = mean3.n_rows;
   int p = mean3.n_cols;
@@ -29,8 +29,7 @@ Rcpp::List wass2_barycenter(arma::mat mean3, arma::cube covs3, arma::vec lambdas
   arma::mat msohinv(p,p,fill::zeros); // Sig^(-1/2)
   arma::mat msumtmp(p,p,fill::zeros); // intermediate term for addition
   
-  int maxiter = 123;
-  double sthr = 1e-10;
+  double sthr = eps;
   double sinv = 0.0;
   for (int it=0;it<maxiter;it++){
     // precompute two interim matrices

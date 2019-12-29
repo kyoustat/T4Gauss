@@ -18,15 +18,17 @@ BEGIN_RCPP
 END_RCPP
 }
 // wass2_barycenter
-Rcpp::List wass2_barycenter(arma::mat mean3, arma::cube covs3, arma::vec lambdas);
-RcppExport SEXP _T4Gauss_wass2_barycenter(SEXP mean3SEXP, SEXP covs3SEXP, SEXP lambdasSEXP) {
+Rcpp::List wass2_barycenter(arma::mat mean3, arma::cube covs3, arma::vec lambdas, int maxiter, double eps);
+RcppExport SEXP _T4Gauss_wass2_barycenter(SEXP mean3SEXP, SEXP covs3SEXP, SEXP lambdasSEXP, SEXP maxiterSEXP, SEXP epsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::mat >::type mean3(mean3SEXP);
     Rcpp::traits::input_parameter< arma::cube >::type covs3(covs3SEXP);
     Rcpp::traits::input_parameter< arma::vec >::type lambdas(lambdasSEXP);
-    rcpp_result_gen = Rcpp::wrap(wass2_barycenter(mean3, covs3, lambdas));
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    rcpp_result_gen = Rcpp::wrap(wass2_barycenter(mean3, covs3, lambdas, maxiter, eps));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -161,6 +163,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// wass2covs_fmean
+Rcpp::List wass2covs_fmean(arma::cube covs, arma::vec lambdas, int maxiter, double eps);
+RcppExport SEXP _T4Gauss_wass2covs_fmean(SEXP covsSEXP, SEXP lambdasSEXP, SEXP maxiterSEXP, SEXP epsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::cube >::type covs(covsSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type lambdas(lambdasSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    rcpp_result_gen = Rcpp::wrap(wass2covs_fmean(covs, lambdas, maxiter, eps));
+    return rcpp_result_gen;
+END_RCPP
+}
 // arma_gmm_full
 Rcpp::List arma_gmm_full(arma::mat& X, int k, int maxiter);
 RcppExport SEXP _T4Gauss_arma_gmm_full(SEXP XSEXP, SEXP kSEXP, SEXP maxiterSEXP) {
@@ -248,7 +264,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_T4Gauss_sqrtm_covs", (DL_FUNC) &_T4Gauss_sqrtm_covs, 1},
-    {"_T4Gauss_wass2_barycenter", (DL_FUNC) &_T4Gauss_wass2_barycenter, 3},
+    {"_T4Gauss_wass2_barycenter", (DL_FUNC) &_T4Gauss_wass2_barycenter, 5},
     {"_T4Gauss_wass2_dist", (DL_FUNC) &_T4Gauss_wass2_dist, 2},
     {"_T4Gauss_wass2_dist2", (DL_FUNC) &_T4Gauss_wass2_dist2, 4},
     {"_T4Gauss_kl_dist", (DL_FUNC) &_T4Gauss_kl_dist, 2},
@@ -259,6 +275,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_T4Gauss_bh_dist", (DL_FUNC) &_T4Gauss_bh_dist, 2},
     {"_T4Gauss_bh_dist2", (DL_FUNC) &_T4Gauss_bh_dist2, 4},
     {"_T4Gauss_cpp_dmvnorm", (DL_FUNC) &_T4Gauss_cpp_dmvnorm, 3},
+    {"_T4Gauss_wass2covs_fmean", (DL_FUNC) &_T4Gauss_wass2covs_fmean, 4},
     {"_T4Gauss_arma_gmm_full", (DL_FUNC) &_T4Gauss_arma_gmm_full, 3},
     {"_T4Gauss_arma_gmm_diag", (DL_FUNC) &_T4Gauss_arma_gmm_diag, 3},
     {"_T4Gauss_wass2_interp", (DL_FUNC) &_T4Gauss_wass2_interp, 5},

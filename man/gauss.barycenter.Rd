@@ -4,8 +4,40 @@
 \alias{gauss.barycenter}
 \title{Barycenter of Gaussian Distributions}
 \usage{
-gauss.barycenter(x, y = NULL, type = c("wass2"))
+gauss.barycenter(
+  x,
+  y = NULL,
+  type = c("wass2fpt", "wass2geo"),
+  maxiter = 200,
+  eps = 1e-10
+)
 }
 \description{
 Barycenter of Gaussian Distributions
+}
+\examples{
+## generate univariate Gaussians
+mylist1d = list()
+for (i in 1:50){
+   my.ctd = stats::runif(1, min=-0.5, max=0.5)
+   my.sd  = stats::runif(1, min=0.9, max=1.1)
+   mylist1d[[i]] = wrapgauss1d(mean=my.ctd, sd=my.sd)
+}
+wass2fpt = gauss.barycenter(mylist1d, type="wass2fpt")
+wass2geo = gauss.barycenter(mylist1d, type="wass2geo")
+
+\dontrun{
+## test with 5-dimensional Gaussians
+mylist5d = list()
+mycovs   = list()
+for (i in 1:50){
+   my.ctd = stats::runif(5, min=-0.5, max=0.5)
+   my.sig = stats::cov(matrix(stats::rnorm(100*5, sd=2),ncol=5))
+   mycovs[[i]] = my.sig
+   mylist5d[[i]] = wrapgaussNd(mu=my.ctd, sigma=my.sig)
+}
+wass2fpt = gauss.barycenter(mylist5d, type="wass2fpt")
+wass2geo = gauss.barycenter(mylist5d, type="wass2geo")
+}
+
 }

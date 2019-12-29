@@ -5,8 +5,8 @@ sqrtm_covs <- function(covs3) {
     .Call('_T4Gauss_sqrtm_covs', PACKAGE = 'T4Gauss', covs3)
 }
 
-wass2_barycenter <- function(mean3, covs3, lambdas) {
-    .Call('_T4Gauss_wass2_barycenter', PACKAGE = 'T4Gauss', mean3, covs3, lambdas)
+wass2_barycenter <- function(mean3, covs3, lambdas, maxiter, eps) {
+    .Call('_T4Gauss_wass2_barycenter', PACKAGE = 'T4Gauss', mean3, covs3, lambdas, maxiter, eps)
 }
 
 wass2_dist <- function(mean3, covs3) {
@@ -47,6 +47,10 @@ bh_dist2 <- function(mean1, covs1, mean2, covs2) {
 
 cpp_dmvnorm <- function(X, mean, Sigma) {
     .Call('_T4Gauss_cpp_dmvnorm', PACKAGE = 'T4Gauss', X, mean, Sigma)
+}
+
+wass2covs_fmean <- function(covs, lambdas, maxiter, eps) {
+    .Call('_T4Gauss_wass2covs_fmean', PACKAGE = 'T4Gauss', covs, lambdas, maxiter, eps)
 }
 
 arma_gmm_full <- function(X, k, maxiter) {
