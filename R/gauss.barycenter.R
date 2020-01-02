@@ -9,7 +9,7 @@
 #'    mylist1d[[i]] = wrapgauss1d(mean=my.ctd, sd=my.sd)
 #' }
 #' wass2fpt = gauss.barycenter(mylist1d, type="wass2fpt")
-#' wass2geo = gauss.barycenter(mylist1d, type="wass2geo")
+#' wass2rgd = gauss.barycenter(mylist1d, type="wass2rgd")
 #' 
 #' \dontrun{
 #' ## test with 5-dimensional Gaussians
@@ -17,17 +17,17 @@
 #' mycovs   = list()
 #' for (i in 1:50){
 #'    my.ctd = stats::runif(5, min=-0.5, max=0.5)
-#'    my.sig = stats::cov(matrix(stats::rnorm(100*5, sd=2),ncol=5))
+#'    my.sig = stats::cov(matrix(T4Gauss::rnorm(100*5),ncol=5))
 #'    mycovs[[i]] = my.sig
 #'    mylist5d[[i]] = wrapgaussNd(mu=my.ctd, sigma=my.sig)
 #' }
 #' wass2fpt = gauss.barycenter(mylist5d, type="wass2fpt")
-#' wass2geo = gauss.barycenter(mylist5d, type="wass2geo")
+#' wass2rgd = gauss.barycenter(mylist5d, type="wass2rgd")
 #' }
 #' 
 #' @export
-gauss.barycenter <- function(x, y=NULL, type=c("wass2fpt","wass2geo"), 
-                             maxiter=200, eps=1e-10){
+gauss.barycenter <- function(x, y=NULL, type=c("wass2fpt","wass2rgd"), 
+                             maxiter=200, eps=1e-10, nthreads=0){
   #######################################################
   # Preprocessing
   mymethod = match.arg(type)
@@ -51,7 +51,7 @@ gauss.barycenter <- function(x, y=NULL, type=c("wass2fpt","wass2geo"),
   }
   par.iter = round(maxiter)
   par.eps  = as.double(eps)
-  
+  nCores   = round(nthreads)
   
   #######################################################
   # Set the weight
@@ -59,7 +59,7 @@ gauss.barycenter <- function(x, y=NULL, type=c("wass2fpt","wass2geo"),
   
   #######################################################
   # Compute and Return
-  return(barygauss_selection(dglist, lambdas, mymethod, par.iter, par.eps))
+  return(barygauss_selection(dglist, lambdas, mymethod, par.iter, par.eps, nCores))
 }
 
 
@@ -68,23 +68,23 @@ gauss.barycenter <- function(x, y=NULL, type=c("wass2fpt","wass2geo"),
 # (0) switching argument
 # (1) wass2    : under Wasserstein Geometry
 #     wass2fpt : fixed-point iteration
-#     wass2geo : Riemannian Optimization
+#     wass2rgd : Riemannian Optimization
 
 # (0) switching argument --------------------------------------------------
 #' @keywords internal
 #' @noRd
 barygauss_selection <- function(dglist, lbd=(rep(1,length(dglist))/length(dglist)), method, 
-                                par.iter, par.eps){
+                                par.iter, par.eps, nCores=0){
   output = switch(method,
-                  wass2fpt = barygauss_wass2fpt(dglist, lbd, par.iter, par.eps),
-                  wass2geo = barygauss_wass2geo(dglist, lbd, par.iter, par.eps))
+                  wass2fpt = barygauss_wass2fpt(dglist, lbd, par.iter, par.eps, nCores),
+                  wass2rgd = barygauss_wass2rgd(dglist, lbd, par.iter, par.eps, nCores))
   return(output)
 }
 
 # (1) wass2 ---------------------------------------------------------------
 #' @keywords internal
 #' @noRd
-barygauss_wass2fpt <- function(dglist, lambdas, par.iter, par.eps){
+barygauss_wass2fpt <- function(dglist, lambdas, par.iter, par.eps, nCores=0){
   # parameters
   N = length(dglist)
   p = dglist[[1]]$dimension
@@ -107,7 +107,7 @@ barygauss_wass2fpt <- function(dglist, lambdas, par.iter, par.eps){
 }
 #' @keywords internal
 #' @noRd
-barygauss_wass2geo <- function(dglist, lambdas, par.iter, par.eps){
+barygauss_wass2rgd <- function(dglist, lambdas, par.iter, par.eps, nCores=0){
   # parameters
   N = length(dglist)
   p = dglist[[1]]$dimension
@@ -125,11 +125,36 @@ barygauss_wass2geo <- function(dglist, lambdas, par.iter, par.eps){
   for (n in 1:N){
     mout = mout + lambdas[n]*as.vector(mean3[n,])
   }
+  mout = as.vector(wass2covs_mu(mean3, lambdas))
+  
   # covariance
-  covout = wass2covs_fmean(covs3, lambdas, par.iter, par.eps)$x
+  if (nCores > 0){
+    covout = wass2covs_fmean_openmp(covs3, lambdas, par.iter, par.eps, nCores)$x  
+  } else {
+    covout = wass2covs_fmean(covs3, lambdas, par.iter, par.eps)$x
+  }
+  
   if (p < 2){
     return(wrapgauss1d(mean=mout, sd=sqrt(covout)))
   } else {
     return(wrapgaussNd(mu=mout, sigma=covout))
   }
 }
+
+# ## personal experiment with microbenchmark
+# library(microbenchmark)
+# mylist5d = list()
+# mycovs   = list()
+# for (i in 1:50){
+#   my.ctd = stats::runif(5, min=-0.5, max=0.5)
+#   my.sig = stats::cov(matrix(T4Gauss::rnorm(100*5),ncol=5))
+#   mycovs[[i]] = my.sig
+#   mylist5d[[i]] = wrapgaussNd(mu=my.ctd, sigma=my.sig)
+# }
+# microbenchmark(
+#   fpt = gauss.barycenter(mylist5d, type="wass2fpt"),
+#   rgd0 = gauss.barycenter(mylist5d, type="wass2rgd"),  
+#   rgd3 = gauss.barycenter(mylist5d, type="wass2rgd", nthreads = 3),
+#   rgd6 = gauss.barycenter(mylist5d, type="wass2rgd", nthreads = 6),
+#   rgd9 = gauss.barycenter(mylist5d, type="wass2rgd", nthreads = 9)
+# )

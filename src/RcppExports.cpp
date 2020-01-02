@@ -163,6 +163,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// wass2covs_mu
+arma::rowvec wass2covs_mu(arma::mat means, arma::vec lambdas);
+RcppExport SEXP _T4Gauss_wass2covs_mu(SEXP meansSEXP, SEXP lambdasSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type means(meansSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type lambdas(lambdasSEXP);
+    rcpp_result_gen = Rcpp::wrap(wass2covs_mu(means, lambdas));
+    return rcpp_result_gen;
+END_RCPP
+}
 // wass2covs_fmean
 Rcpp::List wass2covs_fmean(arma::cube covs, arma::vec lambdas, int maxiter, double eps);
 RcppExport SEXP _T4Gauss_wass2covs_fmean(SEXP covsSEXP, SEXP lambdasSEXP, SEXP maxiterSEXP, SEXP epsSEXP) {
@@ -174,6 +186,21 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
     rcpp_result_gen = Rcpp::wrap(wass2covs_fmean(covs, lambdas, maxiter, eps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// wass2covs_fmean_openmp
+Rcpp::List wass2covs_fmean_openmp(arma::cube covs, arma::vec lambdas, int maxiter, double eps, int nCores);
+RcppExport SEXP _T4Gauss_wass2covs_fmean_openmp(SEXP covsSEXP, SEXP lambdasSEXP, SEXP maxiterSEXP, SEXP epsSEXP, SEXP nCoresSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::cube >::type covs(covsSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type lambdas(lambdasSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< int >::type nCores(nCoresSEXP);
+    rcpp_result_gen = Rcpp::wrap(wass2covs_fmean_openmp(covs, lambdas, maxiter, eps, nCores));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -275,7 +302,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_T4Gauss_bh_dist", (DL_FUNC) &_T4Gauss_bh_dist, 2},
     {"_T4Gauss_bh_dist2", (DL_FUNC) &_T4Gauss_bh_dist2, 4},
     {"_T4Gauss_cpp_dmvnorm", (DL_FUNC) &_T4Gauss_cpp_dmvnorm, 3},
+    {"_T4Gauss_wass2covs_mu", (DL_FUNC) &_T4Gauss_wass2covs_mu, 2},
     {"_T4Gauss_wass2covs_fmean", (DL_FUNC) &_T4Gauss_wass2covs_fmean, 4},
+    {"_T4Gauss_wass2covs_fmean_openmp", (DL_FUNC) &_T4Gauss_wass2covs_fmean_openmp, 5},
     {"_T4Gauss_arma_gmm_full", (DL_FUNC) &_T4Gauss_arma_gmm_full, 3},
     {"_T4Gauss_arma_gmm_diag", (DL_FUNC) &_T4Gauss_arma_gmm_diag, 3},
     {"_T4Gauss_wass2_interp", (DL_FUNC) &_T4Gauss_wass2_interp, 5},

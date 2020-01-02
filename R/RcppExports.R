@@ -49,8 +49,16 @@ cpp_dmvnorm <- function(X, mean, Sigma) {
     .Call('_T4Gauss_cpp_dmvnorm', PACKAGE = 'T4Gauss', X, mean, Sigma)
 }
 
+wass2covs_mu <- function(means, lambdas) {
+    .Call('_T4Gauss_wass2covs_mu', PACKAGE = 'T4Gauss', means, lambdas)
+}
+
 wass2covs_fmean <- function(covs, lambdas, maxiter, eps) {
     .Call('_T4Gauss_wass2covs_fmean', PACKAGE = 'T4Gauss', covs, lambdas, maxiter, eps)
+}
+
+wass2covs_fmean_openmp <- function(covs, lambdas, maxiter, eps, nCores) {
+    .Call('_T4Gauss_wass2covs_fmean_openmp', PACKAGE = 'T4Gauss', covs, lambdas, maxiter, eps, nCores)
 }
 
 arma_gmm_full <- function(X, k, maxiter) {

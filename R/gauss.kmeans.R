@@ -46,7 +46,7 @@ gauss.kmeans <- function(glist, k=2, type=c("wass2"), maxiter = 100){
   # Initialize
   label.old  = gauss.kmedoids.internal(glist, k=myk)$clustering 
   center.old = gauss.kmeans.center(glist, label.old, myk, mytype)
-
+  
   #######################################################
   # Naive Algorithm
   for (it in 1:maxiter){
@@ -56,10 +56,10 @@ gauss.kmeans <- function(glist, k=2, type=c("wass2"), maxiter = 100){
     # A-2. class assignment
     label.new = as.integer(as.factor(base::apply(pdmat, 1, aux_whichmin)))
     label.new = gauss.kmeans.label.adjust(glist, label.new, myk)
-
+  
     # Update Step
     center.new = gauss.kmeans.center(glist, label.new, myk, mytype)
-
+  
     # Iteration Control
     labeldel   = as.double(mclustcomp::mclustcomp(label.new, label.old,types="nmi1")[2])
     label.old  = label.new
@@ -67,7 +67,7 @@ gauss.kmeans <- function(glist, k=2, type=c("wass2"), maxiter = 100){
     if ((labeldel>=0.99)&&(it>=5)){
       break
     }
-    print(paste("iteration ",it, " complete..",sep=""))
+    # print(paste("iteration ",it, " complete..",sep=""))
   }
   
   ############################################################
@@ -95,11 +95,15 @@ gauss.kmeans.center <- function(glist, label, k, type){
       centers[[i]] = glist[[idnow]]
     } else {
       gparts = glist[idnow]
-      centers[[i]] = barygauss_selection(gparts, method=type)
+      if (all(type=="wass2")){
+        centers[[i]] = barygauss_selection(gparts, method="wass2fpt", 
+                                           par.iter=100, par.eps=1e-6)  
+      }
     }
   }
   return(centers)
 }
+
 #' @keywords internal
 #' @noRd
 gauss.kmeans.label.adjust <- function(glist, label, k){ # if
