@@ -31,8 +31,23 @@
 #' plot(mdsx, mdsy, pch=19, col=cl4, main="k=4 means")
 #' par(opar)
 #' 
+#' \dontrun{
+#' ## see the effect of different initialization
+#' c3random  = gauss.kmeans(mylist, k=3, init.type="random")$cluster
+#' c3kpp     = gauss.kmeans(mylist, k=3, init.type="kmeans++")$cluster
+#' c3medoids = gauss.kmeans(mylist, k=3, init.type="kmedoids")$cluster
+#' 
+#' ## visualize
+#' opar = par(mfrow=c(1,3), pty="s")
+#' plot(mdsx, mdsy, pch=19, col=c3random,  main="init: random")
+#' plot(mdsx, mdsy, pch=19, col=c3kpp,     main="init: k-means++")
+#' plot(mdsx, mdsy, pch=19, col=c3medoids, main="init: k-medoids")
+#' par(opar)
+#' }
+#' 
 #' @export
-gauss.kmeans <- function(glist, k=2, type=c("wass2"), maxiter = 100){
+gauss.kmeans <- function(glist, k=2, type=c("wass2"), maxiter=100, nthreads=1,
+                         init.type=c("random","kmeans++","kmedoids","specified"), init.label=NULL){
   #######################################################
   # Preprocessing
   if (!check_list_gauss(glist)){
@@ -41,11 +56,28 @@ gauss.kmeans <- function(glist, k=2, type=c("wass2"), maxiter = 100){
   mytype = match.arg(type)
   myk    = round(k)
   myn    = length(glist)
+  nCores = round(nthreads)
   
   #######################################################
   # Initialize
-  label.old  = gauss.kmedoids.internal(glist, k=myk)$clustering 
-  center.old = gauss.kmeans.center(glist, label.old, myk, mytype)
+  if (myk >= myn){
+    stop("* gauss.kmeans : 'k' should be a smaller number than 'length(glist)'.")
+  }
+  init.type = match.arg(init.type)
+  if (all(init.type=="random")){
+    label.old = base::sample(c(base::sample(1:myk, myn-myk, replace=TRUE), 1:myk))
+  } else if (all(init.type=="kmeans++")){
+    pdistnow  = gauss.pdist(glist, type=mytype, as.dist=TRUE)
+    label.old = DAS::kmeanspp(pdistnow, k=myk)$cluster
+  } else if (all(init.type=="kmedoids")){
+    label.old = gauss.kmedoids.internal(glist, k=myk)$clustering   
+  } else if (all(init.type=="specified")) {
+    label.old = as.integer(as.factor(init.label))
+    if ((length(label.old)!=myn)||(length(unique(label.old))!=myk)){
+      stop("* gauss.kmeans : input 'init.label' is not a valid vector of length/number of unique labels.")
+    }
+  }
+  center.old = gauss.kmeans.center(glist, label.old, myk, mytype, nCores)
   
   #######################################################
   # Naive Algorithm
@@ -58,7 +90,7 @@ gauss.kmeans <- function(glist, k=2, type=c("wass2"), maxiter = 100){
     label.new = gauss.kmeans.label.adjust(glist, label.new, myk)
   
     # Update Step
-    center.new = gauss.kmeans.center(glist, label.new, myk, mytype)
+    center.new = gauss.kmeans.center(glist, label.new, myk, mytype, nCores)
   
     # Iteration Control
     labeldel   = as.double(mclustcomp::mclustcomp(label.new, label.old,types="nmi1")[2])
@@ -67,14 +99,13 @@ gauss.kmeans <- function(glist, k=2, type=c("wass2"), maxiter = 100){
     if ((labeldel>=0.99)&&(it>=5)){
       break
     }
-    # print(paste("iteration ",it, " complete..",sep=""))
   }
   
   ############################################################
   # Return
   output = list()
   output$cluster = label.old
-  output$centers = center.old
+  output$means   = center.old
   return(output)
 }
 
@@ -83,7 +114,7 @@ gauss.kmeans <- function(glist, k=2, type=c("wass2"), maxiter = 100){
 # auxiliary functions -----------------------------------------------------
 #' @keywords internal
 #' @noRd
-gauss.kmeans.center <- function(glist, label, k, type){
+gauss.kmeans.center <- function(glist, label, k, type, nthreads){
   label  = round(label)
   n      = length(glist)
   k      = round(k)
@@ -96,8 +127,13 @@ gauss.kmeans.center <- function(glist, label, k, type){
     } else {
       gparts = glist[idnow]
       if (all(type=="wass2")){
-        centers[[i]] = barygauss_selection(gparts, method="wass2fpt", 
-                                           par.iter=100, par.eps=1e-6)  
+        if (nthreads > 1){
+          centers[[i]] = barygauss_selection(gparts, method="wass2rgd", 
+                                             par.iter=100, par.eps=1e-6, nCores=nthreads)  
+        } else {
+          centers[[i]] = barygauss_selection(gparts, method="wass2fpt", 
+                                             par.iter=100, par.eps=1e-6) 
+        }
       }
     }
   }

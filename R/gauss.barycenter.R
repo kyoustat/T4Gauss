@@ -128,12 +128,12 @@ barygauss_wass2rgd <- function(dglist, lambdas, par.iter, par.eps, nCores=0){
   mout = as.vector(wass2covs_mu(mean3, lambdas))
   
   # covariance
-  if (nCores > 0){
-    covout = wass2covs_fmean_openmp(covs3, lambdas, par.iter, par.eps, nCores)$x  
+  if (nCores > 1){
+    covrun = wass2covs_fmean_openmp(covs3, lambdas, par.iter, par.eps, nCores) 
   } else {
-    covout = wass2covs_fmean(covs3, lambdas, par.iter, par.eps)$x
+    covrun = wass2covs_fmean(covs3, lambdas, par.iter, par.eps)
   }
-  
+  covout = covrun$x  
   if (p < 2){
     return(wrapgauss1d(mean=mout, sd=sqrt(covout)))
   } else {
@@ -153,7 +153,7 @@ barygauss_wass2rgd <- function(dglist, lambdas, par.iter, par.eps, nCores=0){
 # }
 # microbenchmark(
 #   fpt = gauss.barycenter(mylist5d, type="wass2fpt"),
-#   rgd0 = gauss.barycenter(mylist5d, type="wass2rgd"),  
+#   rgd0 = gauss.barycenter(mylist5d, type="wass2rgd"),
 #   rgd3 = gauss.barycenter(mylist5d, type="wass2rgd", nthreads = 3),
 #   rgd6 = gauss.barycenter(mylist5d, type="wass2rgd", nthreads = 6),
 #   rgd9 = gauss.barycenter(mylist5d, type="wass2rgd", nthreads = 9)

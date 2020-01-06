@@ -4,7 +4,15 @@
 \alias{gauss.kmeans}
 \title{K-Means clustering for Gaussian Distributions}
 \usage{
-gauss.kmeans(glist, k = 2, type = c("wass2"), maxiter = 100)
+gauss.kmeans(
+  glist,
+  k = 2,
+  type = c("wass2"),
+  maxiter = 100,
+  nthreads = 1,
+  init.type = c("random", "kmeans++", "kmedoids", "specified"),
+  init.label = NULL
+)
 }
 \description{
 K-Means clustering for Gaussian Distributions
@@ -38,5 +46,19 @@ plot(mdsx, mdsy, pch=19, col=cl2, main="k=2 means")
 plot(mdsx, mdsy, pch=19, col=cl3, main="k=3 means")
 plot(mdsx, mdsy, pch=19, col=cl4, main="k=4 means")
 par(opar)
+
+\dontrun{
+## see the effect of different initialization
+c3random  = gauss.kmeans(mylist, k=3, init.type="random")$cluster
+c3kpp     = gauss.kmeans(mylist, k=3, init.type="kmeans++")$cluster
+c3medoids = gauss.kmeans(mylist, k=3, init.type="kmedoids")$cluster
+
+## visualize
+opar = par(mfrow=c(1,3), pty="s")
+plot(mdsx, mdsy, pch=19, col=c3random,  main="init: random")
+plot(mdsx, mdsy, pch=19, col=c3kpp,     main="init: k-means++")
+plot(mdsx, mdsy, pch=19, col=c3medoids, main="init: k-medoids")
+par(opar)
+}
 
 }

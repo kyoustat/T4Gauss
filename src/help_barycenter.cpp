@@ -1,7 +1,3 @@
-/*
- * (1) wass2_barycenter
- */
-
 #include "RcppArmadillo.h"
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -9,7 +5,6 @@
 using namespace Rcpp;
 using namespace arma;
 
-// (1) wass2_barycenter
 // [[Rcpp::export]]
 Rcpp::List wass2_barycenter(arma::mat mean3, arma::cube covs3, arma::vec lambdas, int maxiter, double eps){
   // parameters

@@ -204,6 +204,35 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// wass2covs_fmedian
+Rcpp::List wass2covs_fmedian(arma::cube covs, arma::vec lambdas, int maxiter, double eps);
+RcppExport SEXP _T4Gauss_wass2covs_fmedian(SEXP covsSEXP, SEXP lambdasSEXP, SEXP maxiterSEXP, SEXP epsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::cube >::type covs(covsSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type lambdas(lambdasSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    rcpp_result_gen = Rcpp::wrap(wass2covs_fmedian(covs, lambdas, maxiter, eps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// wass2covs_fmedian_openmp
+Rcpp::List wass2covs_fmedian_openmp(arma::cube covs, arma::vec lambdas, int maxiter, double eps, int nCores);
+RcppExport SEXP _T4Gauss_wass2covs_fmedian_openmp(SEXP covsSEXP, SEXP lambdasSEXP, SEXP maxiterSEXP, SEXP epsSEXP, SEXP nCoresSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::cube >::type covs(covsSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type lambdas(lambdasSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< int >::type nCores(nCoresSEXP);
+    rcpp_result_gen = Rcpp::wrap(wass2covs_fmedian_openmp(covs, lambdas, maxiter, eps, nCores));
+    return rcpp_result_gen;
+END_RCPP
+}
 // arma_gmm_full
 Rcpp::List arma_gmm_full(arma::mat& X, int k, int maxiter);
 RcppExport SEXP _T4Gauss_arma_gmm_full(SEXP XSEXP, SEXP kSEXP, SEXP maxiterSEXP) {
@@ -245,49 +274,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// rcpparma_hello_world
-arma::mat rcpparma_hello_world();
-RcppExport SEXP _T4Gauss_rcpparma_hello_world() {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(rcpparma_hello_world());
-    return rcpp_result_gen;
-END_RCPP
-}
-// rcpparma_outerproduct
-arma::mat rcpparma_outerproduct(const arma::colvec& x);
-RcppExport SEXP _T4Gauss_rcpparma_outerproduct(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::colvec& >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpparma_outerproduct(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// rcpparma_innerproduct
-double rcpparma_innerproduct(const arma::colvec& x);
-RcppExport SEXP _T4Gauss_rcpparma_innerproduct(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::colvec& >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpparma_innerproduct(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// rcpparma_bothproducts
-Rcpp::List rcpparma_bothproducts(const arma::colvec& x);
-RcppExport SEXP _T4Gauss_rcpparma_bothproducts(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::colvec& >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpparma_bothproducts(x));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_T4Gauss_sqrtm_covs", (DL_FUNC) &_T4Gauss_sqrtm_covs, 1},
@@ -305,13 +291,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_T4Gauss_wass2covs_mu", (DL_FUNC) &_T4Gauss_wass2covs_mu, 2},
     {"_T4Gauss_wass2covs_fmean", (DL_FUNC) &_T4Gauss_wass2covs_fmean, 4},
     {"_T4Gauss_wass2covs_fmean_openmp", (DL_FUNC) &_T4Gauss_wass2covs_fmean_openmp, 5},
+    {"_T4Gauss_wass2covs_fmedian", (DL_FUNC) &_T4Gauss_wass2covs_fmedian, 4},
+    {"_T4Gauss_wass2covs_fmedian_openmp", (DL_FUNC) &_T4Gauss_wass2covs_fmedian_openmp, 5},
     {"_T4Gauss_arma_gmm_full", (DL_FUNC) &_T4Gauss_arma_gmm_full, 3},
     {"_T4Gauss_arma_gmm_diag", (DL_FUNC) &_T4Gauss_arma_gmm_diag, 3},
     {"_T4Gauss_wass2_interp", (DL_FUNC) &_T4Gauss_wass2_interp, 5},
-    {"_T4Gauss_rcpparma_hello_world", (DL_FUNC) &_T4Gauss_rcpparma_hello_world, 0},
-    {"_T4Gauss_rcpparma_outerproduct", (DL_FUNC) &_T4Gauss_rcpparma_outerproduct, 1},
-    {"_T4Gauss_rcpparma_innerproduct", (DL_FUNC) &_T4Gauss_rcpparma_innerproduct, 1},
-    {"_T4Gauss_rcpparma_bothproducts", (DL_FUNC) &_T4Gauss_rcpparma_bothproducts, 1},
     {NULL, NULL, 0}
 };
 

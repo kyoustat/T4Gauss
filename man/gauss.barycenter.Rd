@@ -7,9 +7,10 @@
 gauss.barycenter(
   x,
   y = NULL,
-  type = c("wass2fpt", "wass2geo"),
+  type = c("wass2fpt", "wass2rgd"),
   maxiter = 200,
-  eps = 1e-10
+  eps = 1e-10,
+  nthreads = 0
 )
 }
 \description{
@@ -24,7 +25,7 @@ for (i in 1:50){
    mylist1d[[i]] = wrapgauss1d(mean=my.ctd, sd=my.sd)
 }
 wass2fpt = gauss.barycenter(mylist1d, type="wass2fpt")
-wass2geo = gauss.barycenter(mylist1d, type="wass2geo")
+wass2rgd = gauss.barycenter(mylist1d, type="wass2rgd")
 
 \dontrun{
 ## test with 5-dimensional Gaussians
@@ -32,12 +33,12 @@ mylist5d = list()
 mycovs   = list()
 for (i in 1:50){
    my.ctd = stats::runif(5, min=-0.5, max=0.5)
-   my.sig = stats::cov(matrix(stats::rnorm(100*5, sd=2),ncol=5))
+   my.sig = stats::cov(matrix(T4Gauss::rnorm(100*5),ncol=5))
    mycovs[[i]] = my.sig
    mylist5d[[i]] = wrapgaussNd(mu=my.ctd, sigma=my.sig)
 }
 wass2fpt = gauss.barycenter(mylist5d, type="wass2fpt")
-wass2geo = gauss.barycenter(mylist5d, type="wass2geo")
+wass2rgd = gauss.barycenter(mylist5d, type="wass2rgd")
 }
 
 }

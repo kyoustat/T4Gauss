@@ -13,9 +13,6 @@ gauss.kmedoids(glist, k = 2, type = c("wass2"))
 
 \item{type}{type of distance metric to be used.}
 }
-\value{
-an object of class \code{pam}. See \code{\link[cluster]{pam}} for details.
-}
 \description{
 k-Medoids is a generally applicable clustering algorithm 
 as long as we have concept of dissimilarity. We adopt \code{pam} algorithm 

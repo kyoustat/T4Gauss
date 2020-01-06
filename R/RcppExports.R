@@ -61,6 +61,14 @@ wass2covs_fmean_openmp <- function(covs, lambdas, maxiter, eps, nCores) {
     .Call('_T4Gauss_wass2covs_fmean_openmp', PACKAGE = 'T4Gauss', covs, lambdas, maxiter, eps, nCores)
 }
 
+wass2covs_fmedian <- function(covs, lambdas, maxiter, eps) {
+    .Call('_T4Gauss_wass2covs_fmedian', PACKAGE = 'T4Gauss', covs, lambdas, maxiter, eps)
+}
+
+wass2covs_fmedian_openmp <- function(covs, lambdas, maxiter, eps, nCores) {
+    .Call('_T4Gauss_wass2covs_fmedian_openmp', PACKAGE = 'T4Gauss', covs, lambdas, maxiter, eps, nCores)
+}
+
 arma_gmm_full <- function(X, k, maxiter) {
     .Call('_T4Gauss_arma_gmm_full', PACKAGE = 'T4Gauss', X, k, maxiter)
 }
@@ -71,21 +79,5 @@ arma_gmm_diag <- function(X, k, maxiter) {
 
 wass2_interp <- function(m0, m1, sig0, sig1, t) {
     .Call('_T4Gauss_wass2_interp', PACKAGE = 'T4Gauss', m0, m1, sig0, sig1, t)
-}
-
-rcpparma_hello_world <- function() {
-    .Call('_T4Gauss_rcpparma_hello_world', PACKAGE = 'T4Gauss')
-}
-
-rcpparma_outerproduct <- function(x) {
-    .Call('_T4Gauss_rcpparma_outerproduct', PACKAGE = 'T4Gauss', x)
-}
-
-rcpparma_innerproduct <- function(x) {
-    .Call('_T4Gauss_rcpparma_innerproduct', PACKAGE = 'T4Gauss', x)
-}
-
-rcpparma_bothproducts <- function(x) {
-    .Call('_T4Gauss_rcpparma_bothproducts', PACKAGE = 'T4Gauss', x)
 }
 

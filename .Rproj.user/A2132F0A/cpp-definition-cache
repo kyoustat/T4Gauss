@@ -12,7 +12,7 @@
             }
         ],
         "file" : "/home/kisung/Desktop/T4Gauss/src/auxiliary_in_C.cpp",
-        "file_last_write" : 1575146394
+        "file_last_write" : 1578210527
     },
     {
         "definitions" : [
@@ -20,14 +20,14 @@
                 "column" : 12,
                 "file" : "/home/kisung/Desktop/T4Gauss/src/help_barycenter.cpp",
                 "kind" : 6,
-                "line" : 14,
-                "name" : "wass2_barycenter(arma::mat, arma::cube, arma::vec)",
+                "line" : 9,
+                "name" : "wass2_barycenter(arma::mat, arma::cube, arma::vec, int, double)",
                 "parent_name" : "",
-                "usr" : "c:@F@wass2_barycenter#$@N@arma@C@Mat>#d#$@N@arma@C@Cube>#d#$@N@arma@C@Col>#d#"
+                "usr" : "c:@F@wass2_barycenter#$@N@arma@C@Mat>#d#$@N@arma@C@Cube>#d#$@N@arma@C@Col>#d#I#d#"
             }
         ],
         "file" : "/home/kisung/Desktop/T4Gauss/src/help_barycenter.cpp",
-        "file_last_write" : 1575177128
+        "file_last_write" : 1578211116
     },
     {
         "definitions" : [
@@ -35,7 +35,7 @@
                 "column" : 11,
                 "file" : "/home/kisung/Desktop/T4Gauss/src/help_dist.cpp",
                 "kind" : 6,
-                "line" : 15,
+                "line" : 22,
                 "name" : "wass2_dist(arma::mat, arma::cube)",
                 "parent_name" : "",
                 "usr" : "c:@F@wass2_dist#$@N@arma@C@Mat>#d#$@N@arma@C@Cube>#d#"
@@ -44,14 +44,95 @@
                 "column" : 11,
                 "file" : "/home/kisung/Desktop/T4Gauss/src/help_dist.cpp",
                 "kind" : 6,
-                "line" : 54,
+                "line" : 57,
                 "name" : "wass2_dist2(arma::mat, arma::mat, arma::cube, arma::cube)",
                 "parent_name" : "",
                 "usr" : "c:@F@wass2_dist2#$@N@arma@C@Mat>#d#S0_#$@N@arma@C@Cube>#d#S1_#"
+            },
+            {
+                "column" : 11,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_dist.cpp",
+                "kind" : 6,
+                "line" : 93,
+                "name" : "kl_dist(arma::mat, arma::cube)",
+                "parent_name" : "",
+                "usr" : "c:@F@kl_dist#$@N@arma@C@Mat>#d#$@N@arma@C@Cube>#d#"
+            },
+            {
+                "column" : 11,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_dist.cpp",
+                "kind" : 6,
+                "line" : 142,
+                "name" : "kl_dist2(arma::mat, arma::cube, arma::mat, arma::cube)",
+                "parent_name" : "",
+                "usr" : "c:@F@kl_dist2#$@N@arma@C@Mat>#d#$@N@arma@C@Cube>#d#S0_#S1_#"
+            },
+            {
+                "column" : 11,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_dist.cpp",
+                "kind" : 6,
+                "line" : 194,
+                "name" : "skl_dist2(arma::mat, arma::cube, arma::mat, arma::cube)",
+                "parent_name" : "",
+                "usr" : "c:@F@skl_dist2#$@N@arma@C@Mat>#d#$@N@arma@C@Cube>#d#S0_#S1_#"
+            },
+            {
+                "column" : 8,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_dist.cpp",
+                "kind" : 6,
+                "line" : 257,
+                "name" : "cs_common(arma::vec, arma::vec, arma::mat, arma::mat)",
+                "parent_name" : "",
+                "usr" : "c:@F@cs_common#$@N@arma@C@Col>#d#S0_#$@N@arma@C@Mat>#d#S1_#"
+            },
+            {
+                "column" : 11,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_dist.cpp",
+                "kind" : 6,
+                "line" : 272,
+                "name" : "cs_dist(arma::mat, arma::cube)",
+                "parent_name" : "",
+                "usr" : "c:@F@cs_dist#$@N@arma@C@Mat>#d#$@N@arma@C@Cube>#d#"
+            },
+            {
+                "column" : 11,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_dist.cpp",
+                "kind" : 6,
+                "line" : 300,
+                "name" : "cs_dist2(arma::mat, arma::cube, arma::mat, arma::cube)",
+                "parent_name" : "",
+                "usr" : "c:@F@cs_dist2#$@N@arma@C@Mat>#d#$@N@arma@C@Cube>#d#S0_#S1_#"
+            },
+            {
+                "column" : 8,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_dist.cpp",
+                "kind" : 6,
+                "line" : 328,
+                "name" : "bh_common(arma::vec, arma::vec, arma::mat, arma::mat)",
+                "parent_name" : "",
+                "usr" : "c:@F@bh_common#$@N@arma@C@Col>#d#S0_#$@N@arma@C@Mat>#d#S1_#"
+            },
+            {
+                "column" : 11,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_dist.cpp",
+                "kind" : 6,
+                "line" : 346,
+                "name" : "bh_dist(arma::mat, arma::cube)",
+                "parent_name" : "",
+                "usr" : "c:@F@bh_dist#$@N@arma@C@Mat>#d#$@N@arma@C@Cube>#d#"
+            },
+            {
+                "column" : 11,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_dist.cpp",
+                "kind" : 6,
+                "line" : 374,
+                "name" : "bh_dist2(arma::mat, arma::cube, arma::mat, arma::cube)",
+                "parent_name" : "",
+                "usr" : "c:@F@bh_dist2#$@N@arma@C@Mat>#d#$@N@arma@C@Cube>#d#S0_#S1_#"
             }
         ],
         "file" : "/home/kisung/Desktop/T4Gauss/src/help_dist.cpp",
-        "file_last_write" : 1575178725
+        "file_last_write" : 1578210527
     },
     {
         "definitions" : [
@@ -75,7 +156,94 @@
             }
         ],
         "file" : "/home/kisung/Desktop/T4Gauss/src/help_dmvnorm.cpp",
-        "file_last_write" : 1574918942
+        "file_last_write" : 1578210527
+    },
+    {
+        "definitions" : [
+            {
+                "column" : 11,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_frechet.cpp",
+                "kind" : 6,
+                "line" : 16,
+                "name" : "wass2covs_lyapunov(arma::mat, arma::mat)",
+                "parent_name" : "",
+                "usr" : "c:@F@wass2covs_lyapunov#$@N@arma@C@Mat>#d#S0_#"
+            },
+            {
+                "column" : 11,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_frechet.cpp",
+                "kind" : 6,
+                "line" : 20,
+                "name" : "wass2covs_log(arma::mat, arma::mat)",
+                "parent_name" : "",
+                "usr" : "c:@F@wass2covs_log#$@N@arma@C@Mat>#d#S0_#"
+            },
+            {
+                "column" : 11,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_frechet.cpp",
+                "kind" : 6,
+                "line" : 23,
+                "name" : "wass2covs_exp(arma::mat, arma::mat)",
+                "parent_name" : "",
+                "usr" : "c:@F@wass2covs_exp#$@N@arma@C@Mat>#d#S0_#"
+            },
+            {
+                "column" : 11,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_frechet.cpp",
+                "kind" : 6,
+                "line" : 29,
+                "name" : "wass2covs_normvec(arma::mat, arma::cube, int)",
+                "parent_name" : "",
+                "usr" : "c:@F@wass2covs_normvec#$@N@arma@C@Mat>#d#$@N@arma@C@Cube>#d#I#"
+            },
+            {
+                "column" : 14,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_frechet.cpp",
+                "kind" : 6,
+                "line" : 47,
+                "name" : "wass2covs_mu(arma::mat, arma::vec)",
+                "parent_name" : "",
+                "usr" : "c:@F@wass2covs_mu#$@N@arma@C@Mat>#d#$@N@arma@C@Col>#d#"
+            },
+            {
+                "column" : 12,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_frechet.cpp",
+                "kind" : 6,
+                "line" : 58,
+                "name" : "wass2covs_fmean(arma::cube, arma::vec, int, double)",
+                "parent_name" : "",
+                "usr" : "c:@F@wass2covs_fmean#$@N@arma@C@Cube>#d#$@N@arma@C@Col>#d#I#d#"
+            },
+            {
+                "column" : 12,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_frechet.cpp",
+                "kind" : 6,
+                "line" : 105,
+                "name" : "wass2covs_fmean_openmp(arma::cube, arma::vec, int, double, int)",
+                "parent_name" : "",
+                "usr" : "c:@F@wass2covs_fmean_openmp#$@N@arma@C@Cube>#d#$@N@arma@C@Col>#d#I#d#I#"
+            },
+            {
+                "column" : 12,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_frechet.cpp",
+                "kind" : 6,
+                "line" : 155,
+                "name" : "wass2covs_fmedian(arma::cube, arma::vec, int, double)",
+                "parent_name" : "",
+                "usr" : "c:@F@wass2covs_fmedian#$@N@arma@C@Cube>#d#$@N@arma@C@Col>#d#I#d#"
+            },
+            {
+                "column" : 12,
+                "file" : "/home/kisung/Desktop/T4Gauss/src/help_frechet.cpp",
+                "kind" : 6,
+                "line" : 221,
+                "name" : "wass2covs_fmedian_openmp(arma::cube, arma::vec, int, double, int)",
+                "parent_name" : "",
+                "usr" : "c:@F@wass2covs_fmedian_openmp#$@N@arma@C@Cube>#d#$@N@arma@C@Col>#d#I#d#I#"
+            }
+        ],
+        "file" : "/home/kisung/Desktop/T4Gauss/src/help_frechet.cpp",
+        "file_last_write" : 1578248813
     },
     {
         "definitions" : [
@@ -99,7 +267,7 @@
             }
         ],
         "file" : "/home/kisung/Desktop/T4Gauss/src/help_gmm.cpp",
-        "file_last_write" : 1575091352
+        "file_last_write" : 1578210527
     },
     {
         "definitions" : [
@@ -114,48 +282,6 @@
             }
         ],
         "file" : "/home/kisung/Desktop/T4Gauss/src/help_interpolate.cpp",
-        "file_last_write" : 1575164119
-    },
-    {
-        "definitions" : [
-            {
-                "column" : 11,
-                "file" : "/home/kisung/Desktop/T4Gauss/src/rcpparma_hello_world.cpp",
-                "kind" : 6,
-                "line" : 18,
-                "name" : "rcpparma_hello_world",
-                "parent_name" : "",
-                "usr" : "c:@F@rcpparma_hello_world#"
-            },
-            {
-                "column" : 11,
-                "file" : "/home/kisung/Desktop/T4Gauss/src/rcpparma_hello_world.cpp",
-                "kind" : 6,
-                "line" : 30,
-                "name" : "rcpparma_outerproduct(const arma::colvec &)",
-                "parent_name" : "",
-                "usr" : "c:@F@rcpparma_outerproduct#&1$@N@arma@C@Col>#d#"
-            },
-            {
-                "column" : 8,
-                "file" : "/home/kisung/Desktop/T4Gauss/src/rcpparma_hello_world.cpp",
-                "kind" : 6,
-                "line" : 38,
-                "name" : "rcpparma_innerproduct(const arma::colvec &)",
-                "parent_name" : "",
-                "usr" : "c:@F@rcpparma_innerproduct#&1$@N@arma@C@Col>#d#"
-            },
-            {
-                "column" : 12,
-                "file" : "/home/kisung/Desktop/T4Gauss/src/rcpparma_hello_world.cpp",
-                "kind" : 6,
-                "line" : 47,
-                "name" : "rcpparma_bothproducts(const arma::colvec &)",
-                "parent_name" : "",
-                "usr" : "c:@F@rcpparma_bothproducts#&1$@N@arma@C@Col>#d#"
-            }
-        ],
-        "file" : "/home/kisung/Desktop/T4Gauss/src/rcpparma_hello_world.cpp",
-        "file_last_write" : 1574793398
+        "file_last_write" : 1578210527
     }
 ]

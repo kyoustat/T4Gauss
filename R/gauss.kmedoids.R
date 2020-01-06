@@ -8,7 +8,6 @@
 #' @param k the number of clusters.
 #' @param type type of distance metric to be used.
 #' 
-#' @return an object of class \code{pam}. See \code{\link[cluster]{pam}} for details.
 #' 
 #' @examples 
 #' ## generate three-cluster data with univariate Gaussians
@@ -57,7 +56,10 @@ gauss.kmedoids <- function(glist, k=2, type=c("wass2")){
   
   #######################################################
   # Return
-  return(pamout)
+  output = list()
+  output$cluster = pamout$clustering
+  output$medoids = glist[pamout$id.med]
+  return(output)
 }
 
 
