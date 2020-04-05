@@ -9,4 +9,4 @@ Imports: DAS, Rcpp, RcppZiggurat, Rdpack, RiemBase, RiemSphere, cluster, stats, 
 Encoding: UTF-8
 RdMacros: Rdpack
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0

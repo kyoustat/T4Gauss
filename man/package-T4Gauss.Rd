@@ -4,6 +4,3 @@
 \name{package-T4Gauss}
 \alias{package-T4Gauss}
 \title{Tools and Methods for Gaussian Distribution}
-\description{
-Tools and Methods for Gaussian Distribution
-}

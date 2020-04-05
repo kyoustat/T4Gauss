@@ -61,27 +61,26 @@ arma::mat wass2_dist2(arma::mat mean1, arma::mat mean2, arma::cube covs1, arma::
   int p = mean1.n_cols;
   
   // precompute sqrtm of 1st set of covariances
-  arma::cube sqrt3(p,p,M,fill::zeros);
-  for (int m=0;m<M;m++){
-    sqrt3.slice(m) = arma::sqrtmat_sympd(covs1.slice(m));
+  arma::cube sqrt3(p,p,N,fill::zeros);
+  for (int n=0;n<N;n++){
+    sqrt3.slice(n) = arma::sqrtmat_sympd(covs2.slice(n));
   }
   
   // main computation
-  arma::rowvec m0(p,fill::zeros);
   arma::rowvec m1(p,fill::zeros);
-  arma::mat sig0(p,p,fill::zeros);
+  arma::rowvec m2(p,fill::zeros);
   arma::mat sig1(p,p,fill::zeros);
-  arma::mat sig0half(p,p,fill::zeros);
+  arma::mat sig2(p,p,fill::zeros);
+  arma::mat sig2half(p,p,fill::zeros);
   
   arma::mat output(M,N,fill::zeros);
   for (int m=0;m<M;m++){
-    m0   = mean1.row(m);
-    sig0 = covs1.slice(m);
-    sig0half = sqrt3.slice(m);
+    m1   = mean1.row(m);
+    sig1 = covs1.slice(m);
     for (int n=0;n<N;n++){
-      m1   = mean2.row(n);
-      sig1 = covs2.slice(n);
-      output(m,n) = std::pow(arma::norm(m0-m1,2),2) + arma::trace(sig0 + sig1 - 2.0*arma::sqrtmat_sympd(sig0half*sig1*sig0half));
+      m2   = mean2.row(n);
+      sig2 = covs2.slice(n);
+      output(m,n) = std::pow(arma::norm(m1-m2,2),2) + arma::trace(sig1 + sig2 - 2.0*arma::sqrtmat_sympd(sig2half*sig1*sig2half));
     }
   }
   
