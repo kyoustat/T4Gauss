@@ -3,6 +3,7 @@
 #' @docType package
 #' @name package-T4Gauss
 #' @import Rdpack
+#' @importFrom Matrix nearPD
 #' @importFrom RiemSphere mle.spnorm
 #' @importFrom mclustcomp mclustcomp
 #' @importFrom DAS cmds kmeanspp ksets

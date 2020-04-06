@@ -63,9 +63,10 @@ wrapgaussNd <- function(mu, sigma){
   if (!check_musigma(mymean, mysigma)){
     stop("* wrapgaussNd : 'mu' and 'sigma' are not properly valued parameters.")
   }
-  if (min(base::eigen(mysigma, symmetric = TRUE, only.values = TRUE)$values) <= 0){
-    stop("* wrapgaussNd : 'sigma' should be a positive definite matrix.")
-  }
+  mysigma = as.matrix(Matrix::nearPD(mysigma)$mat)
+  # if (min(base::eigen(mysigma, symmetric = TRUE, only.values = TRUE)$values) <= 0){
+  #   stop("* wrapgaussNd : 'sigma' should be a positive definite matrix.")
+  # }
   
   #######################################################
   # Wrap & Return

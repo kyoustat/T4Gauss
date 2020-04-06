@@ -11,7 +11,8 @@ gauss.kmeans(
   maxiter = 100,
   nthreads = 1,
   init.type = c("random", "kmeans++", "kmedoids", "specified"),
-  init.label = NULL
+  init.label = NULL,
+  permute.order = FALSE
 )
 }
 \description{
@@ -41,7 +42,8 @@ mdsx <- as.vector(mds2d[,1])
 mdsy <- as.vector(mds2d[,2])
 
 ## visualize
-opar = par(mfrow=c(1,3), pty="s")
+opar = par(no.readonly=TRUE)
+par(mfrow=c(3,1))
 plot(mdsx, mdsy, pch=19, col=cl2, main="k=2 means")
 plot(mdsx, mdsy, pch=19, col=cl3, main="k=3 means")
 plot(mdsx, mdsy, pch=19, col=cl4, main="k=4 means")

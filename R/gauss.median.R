@@ -107,7 +107,7 @@ median_wass2 <- function(dglist, lambdas, par.iter, par.eps, nCores=0){
 # # compare with barycenter
 # fmean = gauss.barycenter(mylist5d)
 # fmed0 = gauss.median(mylist5d)
-# fmed3 = gauss.median(mylist5d, nthreads = 3) 
+# fmed3 = gauss.median(mylist5d, nthreads = 3)
 # 
 # microbenchmark(
 #   fmed0 = gauss.median(mylist5d, nthreads=0),

@@ -71,6 +71,7 @@ gauss.pdist2 <- function(glist1, glist2, type=c("bh","cs","kl","skl","wass2")){
 
 
 # Auxiliary : Selector ----------------------------------------------------
+#  List of Gaussian Objects
 #' @keywords internal
 #' @noRd
 gauss.pdist2.selector <- function(glist1, glist2, mytype){
